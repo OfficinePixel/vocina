@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Vocina: una voce italiana che gira nel browser</title>
+<link rel="stylesheet" href="vocina.css">
+</head>
+<body>
+<header>
+  <h1>Vocina</h1>
+  <p class="sotto">Una voce sintetica italiana piccolissima, che gira tutta nel tuo browser.</p>
+</header>
+
+<section class="presentazione">
+  <p>Vocina legge l'italiano ad alta voce con un modello da <b>4,5 milioni di parametri</b> (circa {{MB}} MB),
+  e lo fa <b>qui, sul tuo dispositivo</b>: il testo non viene mandato da nessuna parte. Dopo il primo caricamento
+  funziona anche senza rete.</p>
+  <p>Numeri, ore, date, importi, sigle e abbreviazioni si leggono in parole («14:35», «1.203,59 €», «l'82%»).
+  Le voci sono <b>sintetiche</b>: disegnate a parole, non copiate da persone reali.</p>
+</section>
+
+<main>
+  <div class="esempi" id="esempi"></div>
+  <textarea id="testo" aria-label="Testo da leggere">Buongiorno! Mi chiamo Vocina e leggo l'italiano direttamente nel tuo browser. Il treno per Bassano del Grappa parte alle 14:35 dal binario 3, e il biglietto costa 7,50 €.</textarea>
+  <div class="riga">
+    <button id="leggi" disabled>Caricamento…</button>
+    <button id="ferma" class="secondario" disabled>Ferma</button>
+  </div>
+  <div class="riga">
+    <label id="scelta-voce" hidden>Voce <select id="voce"></select></label>
+    <label>Velocità <input id="velocita" type="range" min="0.7" max="1.4" step="0.05" value="1"> <span id="vel">1,00</span></label>
+    <a id="scarica" hidden download="vocina.wav">Scarica WAV</a>
+  </div>
+  <div id="barra" hidden><div id="riempi"></div></div>
+  <p id="stato" aria-live="polite">Avvio…</p>
+  <ol id="frasi"></ol>
+</main>
+
+<footer>
+  <details>
+    <summary>Come funziona</summary>
+    <p>Il testo passa prima da un convertitore in fonemi scritto per l'italiano: trasforma numeri e simboli in
+    parole, poi le parole in fonemi con regole e un piccolo lessico per l'accento e per le e e le o aperte o
+    chiuse. Un modello neurale minuscolo trasforma i fonemi in voce, una frase alla volta, con
+    <a href="https://onnxruntime.ai/">ONNX Runtime Web</a> (WebAssembly). Ogni frase suona appena è pronta.</p>
+    <p>{{STATO_MODELLO}}</p>
+  </details>
+  <details>
+    <summary>Licenze e attribuzioni</summary>
+    <p><b>Vocina è derivato da <a href="https://github.com/n4ze3m/tiny-voca">tiny-voca</a> di n4ze3m</b>
+    (Apache 2.0). Abbiamo usato il suo codice di addestramento e la sua architettura, con queste modifiche:
+    inventario di fonemi italiano, un convertitore testo→fonemi italiano nostro (al posto di quello inglese),
+    voci nuove e dati di addestramento nuovi. I pesi del modello sono addestrati da zero: non vengono da quelli
+    inglesi. Dettagli in <a href="NOTICE">NOTICE</a> e <a href="LICENSE">LICENSE</a>.</p>
+    <p>Dati: frasi di <a href="https://github.com/common-voice/common-voice">Common Voice</a> italiano (CC0) e
+    frasi scritte da noi, lette da voci disegnate con Qwen3-TTS (Apache 2.0). Nessuna voce di persone reali.</p>
+    <p>ONNX Runtime Web: © Microsoft Corporation, licenza MIT (<a href="LICENSE-onnxruntime-web">testo</a>).</p>
+  </details>
+</footer>
+
+<script type="module" src="app.js"></script>
+</body>
+</html>

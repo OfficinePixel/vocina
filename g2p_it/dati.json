@@ -1,0 +1,1960 @@
+{
+ "versione": 1,
+ "nota": "Dati del G2P italiano di bancollm (tiny-voca). Usati identici da g2p_it.py e g2p_it.js: si cambiano qui, poi si rigenerano i vettori di test. Il lessico è scritto a mano: accento sulla vocale tonica (è ò aperte, é ó chiuse), ż = z sonora (dz), ź = z sorda (ts), ṡ = s sonora, ś = s sorda.",
+ "atone": [
+  "il",
+  "lo",
+  "la",
+  "i",
+  "gli",
+  "le",
+  "l",
+  "un",
+  "una",
+  "di",
+  "a",
+  "da",
+  "in",
+  "con",
+  "su",
+  "per",
+  "tra",
+  "fra",
+  "e",
+  "ed",
+  "o",
+  "od",
+  "ad",
+  "ma",
+  "se",
+  "che",
+  "non",
+  "mi",
+  "ti",
+  "si",
+  "ci",
+  "vi",
+  "ne",
+  "li",
+  "del",
+  "dello",
+  "della",
+  "dei",
+  "degli",
+  "delle",
+  "dell",
+  "al",
+  "allo",
+  "alla",
+  "ai",
+  "agli",
+  "alle",
+  "all",
+  "dal",
+  "dallo",
+  "dalla",
+  "dai",
+  "dagli",
+  "dalle",
+  "dall",
+  "nel",
+  "nello",
+  "nella",
+  "nei",
+  "negli",
+  "nelle",
+  "nell",
+  "sul",
+  "sullo",
+  "sulla",
+  "sui",
+  "sugli",
+  "sulle",
+  "sull",
+  "col",
+  "coi",
+  "me",
+  "te",
+  "ce",
+  "ve",
+  "c",
+  "d",
+  "m",
+  "t",
+  "s",
+  "v",
+  "n"
+ ],
+ "suffissi_accento": [
+  [
+   "abile",
+   3
+  ],
+  [
+   "ibile",
+   3
+  ],
+  [
+   "ubile",
+   3
+  ],
+  [
+   "evole",
+   3
+  ],
+  [
+   "issimo",
+   3
+  ],
+  [
+   "issima",
+   3
+  ],
+  [
+   "issimi",
+   3
+  ],
+  [
+   "issime",
+   3
+  ],
+  [
+   "esimo",
+   3
+  ],
+  [
+   "esima",
+   3
+  ],
+  [
+   "esimi",
+   3
+  ],
+  [
+   "esime",
+   3
+  ],
+  [
+   "dici",
+   3
+  ],
+  [
+   "avano",
+   3
+  ],
+  [
+   "evano",
+   3
+  ],
+  [
+   "ivano",
+   3
+  ],
+  [
+   "arono",
+   3
+  ],
+  [
+   "erono",
+   3
+  ],
+  [
+   "irono",
+   3
+  ],
+  [
+   "ebbero",
+   3
+  ],
+  [
+   "assero",
+   3
+  ],
+  [
+   "essero",
+   3
+  ],
+  [
+   "issero",
+   3
+  ],
+  [
+   "ologo",
+   3
+  ],
+  [
+   "ologa",
+   3
+  ],
+  [
+   "ologi",
+   3
+  ],
+  [
+   "ologhe",
+   3
+  ],
+  [
+   "ografo",
+   3
+  ],
+  [
+   "ografa",
+   3
+  ],
+  [
+   "ometro",
+   3
+  ],
+  [
+   "ofono",
+   3
+  ],
+  [
+   "agine",
+   3
+  ],
+  [
+   "aggine",
+   3
+  ],
+  [
+   "igine",
+   3
+  ],
+  [
+   "udine",
+   3
+  ],
+  [
+   "ico",
+   3
+  ],
+  [
+   "ica",
+   3
+  ],
+  [
+   "ici",
+   3
+  ],
+  [
+   "iche",
+   3
+  ],
+  [
+   "ido",
+   3
+  ],
+  [
+   "ida",
+   3
+  ],
+  [
+   "idi",
+   3
+  ],
+  [
+   "ibili",
+   3
+  ],
+  [
+   "abili",
+   3
+  ],
+  [
+   "ubili",
+   3
+  ],
+  [
+   "evoli",
+   3
+  ],
+  [
+   "ono",
+   3
+  ],
+  [
+   "ide",
+   3
+  ],
+  [
+   "aneo",
+   3
+  ],
+  [
+   "anea",
+   3
+  ],
+  [
+   "anei",
+   3
+  ],
+  [
+   "anee",
+   3
+  ],
+  [
+   "ereo",
+   3
+  ],
+  [
+   "erea",
+   3
+  ],
+  [
+   "osito",
+   3
+  ],
+  [
+   "metro",
+   3
+  ],
+  [
+   "metri",
+   3
+  ],
+  [
+   "metra",
+   3
+  ],
+  [
+   "rgine",
+   3
+  ],
+  [
+   "rgini",
+   3
+  ],
+  [
+   "rdine",
+   3
+  ],
+  [
+   "rdini",
+   3
+  ],
+  [
+   "rmine",
+   3
+  ],
+  [
+   "rmini",
+   3
+  ],
+  [
+   "lmine",
+   3
+  ],
+  [
+   "lmini",
+   3
+  ]
+ ],
+ "suffissi_min_nuclei": 3,
+ "suffissi_vocale": [
+  [
+   "ello",
+   "ɛ"
+  ],
+  [
+   "ella",
+   "ɛ"
+  ],
+  [
+   "elli",
+   "ɛ"
+  ],
+  [
+   "elle",
+   "ɛ"
+  ],
+  [
+   "ente",
+   "ɛ"
+  ],
+  [
+   "enti",
+   "ɛ"
+  ],
+  [
+   "enza",
+   "ɛ"
+  ],
+  [
+   "enze",
+   "ɛ"
+  ],
+  [
+   "mente",
+   "e"
+  ],
+  [
+   "mento",
+   "e"
+  ],
+  [
+   "menti",
+   "e"
+  ],
+  [
+   "etto",
+   "e"
+  ],
+  [
+   "etta",
+   "e"
+  ],
+  [
+   "etti",
+   "e"
+  ],
+  [
+   "ette",
+   "e"
+  ],
+  [
+   "ezza",
+   "e"
+  ],
+  [
+   "ezze",
+   "e"
+  ],
+  [
+   "ese",
+   "e"
+  ],
+  [
+   "esi",
+   "e"
+  ],
+  [
+   "ere",
+   "e"
+  ],
+  [
+   "otto",
+   "ɔ"
+  ],
+  [
+   "otta",
+   "ɔ"
+  ],
+  [
+   "otti",
+   "ɔ"
+  ],
+  [
+   "otte",
+   "ɔ"
+  ],
+  [
+   "orio",
+   "ɔ"
+  ],
+  [
+   "oria",
+   "ɔ"
+  ],
+  [
+   "ori",
+   "o"
+  ],
+  [
+   "ore",
+   "o"
+  ],
+  [
+   "oso",
+   "o"
+  ],
+  [
+   "osa",
+   "o"
+  ],
+  [
+   "osi",
+   "o"
+  ],
+  [
+   "ose",
+   "o"
+  ],
+  [
+   "one",
+   "o"
+  ],
+  [
+   "oni",
+   "o"
+  ],
+  [
+   "zione",
+   "o"
+  ],
+  [
+   "ologo",
+   "ɔ"
+  ],
+  [
+   "ologa",
+   "ɔ"
+  ],
+  [
+   "ologi",
+   "ɔ"
+  ]
+ ],
+ "lessico": {
+  "io": "ìo",
+  "mio": "mìo",
+  "mia": "mìa",
+  "mie": "mìe",
+  "tuo": "tùo",
+  "tua": "tùa",
+  "tue": "tùe",
+  "suo": "sùo",
+  "sua": "sùa",
+  "sue": "sùe",
+  "zio": "źìo",
+  "zia": "źìa",
+  "zii": "źìi",
+  "zie": "źìe",
+  "dio": "dìo",
+  "addio": "addìo",
+  "via": "vìa",
+  "vie": "vìe",
+  "lui": "lùi",
+  "cui": "cùi",
+  "fui": "fùi",
+  "colui": "colùi",
+  "costui": "costùi",
+  "altrui": "altrùi",
+  "bugia": "bugìa",
+  "magia": "magìa",
+  "follia": "follìa",
+  "pazzia": "pazzìa",
+  "allegria": "allegrìa",
+  "polizia": "polizìa",
+  "farmacia": "farmacìa",
+  "energia": "energìa",
+  "malattia": "malattìa",
+  "compagnia": "compagnìa",
+  "fantasia": "fantaṡìa",
+  "poesia": "poeṡìa",
+  "geografia": "geografìa",
+  "filosofia": "filoṡofìa",
+  "economia": "economìa",
+  "nostalgia": "nostalgìa",
+  "strategia": "strategìa",
+  "simpatia": "simpatìa",
+  "gelosia": "geloṡìa",
+  "cortesia": "corteṡìa",
+  "borghesia": "borgheṡìa",
+  "armonia": "armonìa",
+  "sinfonia": "sinfonìa",
+  "melodia": "melodìa",
+  "lombardia": "lombardìa",
+  "turchia": "turchìa",
+  "albania": "albanìa",
+  "romania": "romanìa",
+  "bulgaria": "bulgarìa",
+  "agonia": "agonìa",
+  "anomalia": "anomalìa",
+  "categoria": "categorìa",
+  "teoria": "teorìa",
+  "ironia": "ironìa",
+  "ipocrisia": "ipocriṡìa",
+  "eutanasia": "eutanaṡìa",
+  "anestesia": "anesteṡìa",
+  "amnesia": "amneṡìa",
+  "scia": "scìa",
+  "mattia": "mattìa",
+  "sofia": "sofìa",
+  "elia": "elìa",
+  "lucia": "lucìa",
+  "maria": "marìa",
+  "tunisia": "tuniṡìa",
+  "avaria": "avarìa",
+  "galleria": "gallerìa",
+  "pendio": "pendìo",
+  "leggio": "leggìo",
+  "brusio": "bruṡìo",
+  "oblio": "oblìo",
+  "restio": "restìo",
+  "lavorio": "lavorìo",
+  "ronzio": "ronźìo",
+  "mormorio": "mormorìo",
+  "luigi": "luìgi",
+  "materia": "matèria",
+  "miseria": "miṡèria",
+  "arteria": "artèria",
+  "valeria": "valèria",
+  "siberia": "sibèria",
+  "nigeria": "nigèria",
+  "criteria": "critèria",
+  "intemperia": "intempèria",
+  "feria": "fèria",
+  "serie": "sèrie",
+  "amico": "amìco",
+  "amica": "amìca",
+  "nemico": "nemìco",
+  "nemica": "nemìca",
+  "antico": "antìco",
+  "antica": "antìca",
+  "fatica": "fatìca",
+  "formica": "formìca",
+  "mollica": "mollìca",
+  "ortica": "ortìca",
+  "lombrico": "lombrìco",
+  "vescica": "vescìca",
+  "pudica": "pudìca",
+  "pudico": "pudìco",
+  "mendico": "mendìco",
+  "lettiga": "lettìga",
+  "amici": "amìci",
+  "nemici": "nemìci",
+  "antichi": "antìchi",
+  "fatiche": "fatìche",
+  "amiche": "amìche",
+  "antiche": "antìche",
+  "guida": "guìda",
+  "decide": "decìde",
+  "divide": "divìde",
+  "uccide": "uccìde",
+  "coincide": "coincìde",
+  "sorride": "sorrìde",
+  "ancora": "ancóra",
+  "abito": "àbito",
+  "abita": "àbita",
+  "abitano": "àbitano",
+  "albero": "àlbero",
+  "angolo": "àngolo",
+  "attimo": "àttimo",
+  "camera": "càmera",
+  "capita": "càpita",
+  "celebre": "cèlebre",
+  "cenere": "cénere",
+  "compito": "cómpito",
+  "debito": "débito",
+  "diavolo": "diàvolo",
+  "facile": "fàcile",
+  "difficile": "diffìcile",
+  "docile": "dòcile",
+  "utile": "ùtile",
+  "inutile": "inùtile",
+  "fertile": "fèrtile",
+  "simile": "sìmile",
+  "debole": "débole",
+  "agile": "àgile",
+  "fragile": "fràgile",
+  "giovane": "gióvane",
+  "giovani": "gióvani",
+  "gomito": "gómito",
+  "libero": "lìbero",
+  "libera": "lìbera",
+  "liberi": "lìberi",
+  "macchina": "màcchina",
+  "macchine": "màcchine",
+  "margine": "màrgine",
+  "merito": "mèrito",
+  "numero": "nùmero",
+  "numeri": "nùmeri",
+  "ordine": "órdine",
+  "ospite": "òspite",
+  "ospiti": "òspiti",
+  "pagina": "pàgina",
+  "pagine": "pàgine",
+  "palpebra": "pàlpebra",
+  "popolo": "pòpolo",
+  "povero": "pòvero",
+  "povera": "pòvera",
+  "poveri": "pòveri",
+  "principe": "prìncipe",
+  "sabato": "sàbato",
+  "simbolo": "sìmbolo",
+  "stomaco": "stòmaco",
+  "tavolo": "tàvolo",
+  "tavola": "tàvola",
+  "titolo": "tìtolo",
+  "ultimo": "ùltimo",
+  "ultima": "ùltima",
+  "ultimi": "ùltimi",
+  "ultime": "ùltime",
+  "vigile": "vìgile",
+  "zucchero": "źùcchero",
+  "secolo": "sècolo",
+  "lettera": "lèttera",
+  "lettere": "lèttere",
+  "solito": "sòlito",
+  "solita": "sòlita",
+  "subito": "sùbito",
+  "piccolo": "pìccolo",
+  "piccola": "pìccola",
+  "piccoli": "pìccoli",
+  "piccole": "pìccole",
+  "credito": "crédito",
+  "deposito": "depòṡito",
+  "telefono": "telèfono",
+  "telefona": "telèfona",
+  "telefonano": "telèfonano",
+  "medico": "mèdico",
+  "medici": "mèdici",
+  "musica": "mùṡica",
+  "unico": "ùnico",
+  "unica": "ùnica",
+  "pratico": "pràtico",
+  "tecnico": "tècnico",
+  "pubblico": "pùbblico",
+  "pubblica": "pùbblica",
+  "politica": "polìtica",
+  "politico": "polìtico",
+  "cattolico": "cattòlico",
+  "cronaca": "crònaca",
+  "monaco": "mònaco",
+  "carico": "càrico",
+  "carica": "càrica",
+  "logico": "lògico",
+  "logica": "lògica",
+  "magico": "màgico",
+  "esercito": "eṡèrcito",
+  "esempio": "eṡèmpio",
+  "spirito": "spìrito",
+  "orfano": "òrfano",
+  "organo": "òrgano",
+  "valido": "vàlido",
+  "umido": "ùmido",
+  "rapido": "ràpido",
+  "solido": "sòlido",
+  "timido": "tìmido",
+  "liquido": "lìquido",
+  "mobile": "mòbile",
+  "nobile": "nòbile",
+  "termine": "tèrmine",
+  "termini": "tèrmini",
+  "fulmine": "fùlmine",
+  "giungere": "giùngere",
+  "prendere": "prèndere",
+  "mettere": "méttere",
+  "credere": "crédere",
+  "vendere": "véndere",
+  "leggere": "lèggere",
+  "scrivere": "scrìvere",
+  "vivere": "vìvere",
+  "chiedere": "chièdere",
+  "ridere": "rìdere",
+  "perdere": "pèrdere",
+  "chiudere": "chiùdere",
+  "rispondere": "rispóndere",
+  "correre": "córrere",
+  "scegliere": "scégliere",
+  "cogliere": "cògliere",
+  "togliere": "tògliere",
+  "piangere": "piàngere",
+  "spendere": "spèndere",
+  "decidere": "decìdere",
+  "dividere": "divìdere",
+  "muovere": "muòvere",
+  "nascere": "nàscere",
+  "conoscere": "conóscere",
+  "crescere": "créscere",
+  "vincere": "vìncere",
+  "spingere": "spìngere",
+  "rompere": "rómpere",
+  "rendere": "rèndere",
+  "essere": "èssere",
+  "dicono": "dìcono",
+  "fanno": "fànno",
+  "vanno": "vànno",
+  "danno": "dànno",
+  "stanno": "stànno",
+  "hanno": "hànno",
+  "possono": "pòssono",
+  "devono": "dèvono",
+  "vogliono": "vògliono",
+  "vengono": "vèngono",
+  "prendono": "prèndono",
+  "parlano": "pàrlano",
+  "lavorano": "lavòrano",
+  "arrivano": "arrìvano",
+  "restano": "rèstano",
+  "chiamano": "chiàmano",
+  "pensano": "pènsano",
+  "portano": "pòrtano",
+  "passano": "pàssano",
+  "tornano": "tórnano",
+  "aspettano": "aspèttano",
+  "giocano": "gìocano",
+  "mangiano": "màngiano",
+  "cambiano": "càmbiano",
+  "studiano": "stùdiano",
+  "sentono": "sèntono",
+  "partono": "pàrtono",
+  "dormono": "dòrmono",
+  "escono": "èscono",
+  "leggono": "lèggono",
+  "scrivono": "scrìvono",
+  "vivono": "vìvono",
+  "credono": "crédono",
+  "sanno": "sànno",
+  "dovrebbe": "dovrèbbe",
+  "sarebbe": "sarèbbe",
+  "angelo": "àngelo",
+  "davide": "dàvide",
+  "elena": "èlena",
+  "alice": "àlice",
+  "giacomo": "giàcomo",
+  "stefano": "stèfano",
+  "furlan": "furlàn",
+  "niccolo": "niccolò",
+  "padova": "pàdova",
+  "rovigo": "ròvigo",
+  "jesolo": "jèṡolo",
+  "caorle": "càorle",
+  "lonigo": "lònigo",
+  "asolo": "àṡolo",
+  "oderzo": "òderźo",
+  "mirano": "mìrano",
+  "bergamo": "bèrgamo",
+  "modena": "mòdena",
+  "napoli": "nàpoli",
+  "taranto": "tàranto",
+  "genova": "gènova",
+  "pavia": "pavìa",
+  "imola": "ìmola",
+  "rimini": "rìmini",
+  "ancona": "àncona",
+  "pesaro": "pèṡaro",
+  "udine": "ùdine",
+  "cagliari": "càgliari",
+  "sassari": "sàssari",
+  "brindisi": "brìndiṡi",
+  "matera": "màtera",
+  "veneto": "vèneto",
+  "valdobbiadene": "valdobbiàdene",
+  "thiene": "tiène",
+  "recoaro": "recoàro",
+  "schio": "schìo",
+  "este": "èste",
+  "brenta": "brènta",
+  "vicenza": "vicènza",
+  "venezia": "venèzia",
+  "verona": "veróna",
+  "treviso": "trevìṡo",
+  "bassano": "bassàno",
+  "asiago": "asiàgo",
+  "dueville": "duevìlle",
+  "chioggia": "chiòggia",
+  "feltre": "fèltre",
+  "bene": "bène",
+  "sette": "sètte",
+  "sei": "sèi",
+  "mezzo": "mèżżo",
+  "mezza": "mèżża",
+  "terra": "tèrra",
+  "guerra": "guèrra",
+  "meglio": "mèglio",
+  "vecchio": "vècchio",
+  "vecchia": "vècchia",
+  "pezzo": "pèzzo",
+  "presto": "prèsto",
+  "sempre": "sèmpre",
+  "tempo": "tèmpo",
+  "gente": "gènte",
+  "penso": "pènso",
+  "perso": "pèrso",
+  "zero": "żèro",
+  "certo": "cèrto",
+  "certa": "cèrta",
+  "senza": "sènza",
+  "vento": "vènto",
+  "cento": "cènto",
+  "testa": "tèsta",
+  "festa": "fèsta",
+  "ferro": "fèrro",
+  "letto": "lètto",
+  "resto": "rèsto",
+  "sesto": "sèsto",
+  "prezzo": "prèzzo",
+  "ecco": "ècco",
+  "media": "mèdia",
+  "premio": "prèmio",
+  "medio": "mèdio",
+  "nove": "nòve",
+  "otto": "òtto",
+  "poco": "pòco",
+  "poca": "pòca",
+  "pochi": "pòchi",
+  "cosa": "còṡa",
+  "cose": "còṡe",
+  "rosa": "ròṡa",
+  "notte": "nòtte",
+  "porta": "pòrta",
+  "morto": "mòrto",
+  "forte": "fòrte",
+  "molto": "mólto",
+  "molta": "mólta",
+  "molti": "mólti",
+  "proprio": "pròprio",
+  "modo": "mòdo",
+  "nostro": "nòstro",
+  "nostra": "nòstra",
+  "vostro": "vòstro",
+  "vostra": "vòstra",
+  "oggi": "òggi",
+  "ora": "óra",
+  "ore": "óre",
+  "solo": "sólo",
+  "sola": "sóla",
+  "troppo": "tròppo",
+  "dopo": "dópo",
+  "prossimo": "pròssimo",
+  "prossima": "pròssima",
+  "sole": "sóle",
+  "rosso": "rósso",
+  "rossa": "róssa",
+  "mondo": "móndo",
+  "giorno": "giórno",
+  "giorni": "giórni",
+  "lavoro": "lavóro",
+  "bosco": "bòsco",
+  "nome": "nóme",
+  "corpo": "còrpo",
+  "posto": "pòsto",
+  "oro": "òro",
+  "fiore": "fióre",
+  "roba": "ròba",
+  "donna": "dònna",
+  "donne": "dònne",
+  "nonna": "nònna",
+  "nonno": "nònno",
+  "pioggia": "piòggia",
+  "storia": "stòria",
+  "como": "còmo",
+  "roma": "róma",
+  "giorgio": "giòrgio",
+  "giorgia": "giòrgia",
+  "volta": "vòlta",
+  "volte": "vòlte",
+  "rotto": "rótto",
+  "scorso": "scórso",
+  "scorsa": "scórsa",
+  "sono": "sóno",
+  "come": "cóme",
+  "dove": "dóve",
+  "quando": "quàndo",
+  "questo": "quésto",
+  "questa": "quésta",
+  "questi": "quésti",
+  "queste": "quéste",
+  "quello": "quèllo",
+  "quella": "quèlla",
+  "quelli": "quèlli",
+  "quelle": "quèlle",
+  "stesso": "stésso",
+  "stessa": "stéssa",
+  "tre": "tré",
+  "mese": "méṡe",
+  "mesi": "méṡi",
+  "sera": "séra",
+  "vero": "véro",
+  "vera": "véra",
+  "nero": "néro",
+  "nera": "néra",
+  "fresco": "frésco",
+  "verde": "vérde",
+  "pesce": "pésce",
+  "bocca": "bócca",
+  "ottobre": "ottóbre",
+  "voce": "vóce",
+  "noce": "nóce",
+  "croce": "cróce",
+  "colpa": "cólpa",
+  "sorella": "sorèlla",
+  "fratello": "fratèllo",
+  "scuola": "scuòla",
+  "uovo": "uòvo",
+  "nuovo": "nuòvo",
+  "nuova": "nuòva",
+  "pranzo": "prànżo",
+  "romanzo": "romànżo",
+  "bronzo": "brónżo",
+  "lorenzo": "lorènżo",
+  "orzo": "órżo",
+  "zanzara": "żanżàra",
+  "azzurro": "ażżùrro",
+  "azzurra": "ażżùrra",
+  "ozono": "ożòno",
+  "azoto": "ażòto",
+  "garzone": "garżóne",
+  "zitto": "źìtto",
+  "zitta": "źìtta",
+  "zuppa": "źùppa",
+  "zampa": "źàmpa",
+  "zappa": "źàppa",
+  "zoccolo": "źòccolo",
+  "zanna": "źànna",
+  "zucca": "źùcca",
+  "zecca": "źécca",
+  "zolla": "źòlla",
+  "casa": "càśa",
+  "cosi": "così",
+  "po": "pò",
+  "perche": "perché",
+  "piu": "più",
+  "gia": "già",
+  "presente": "preṡènte",
+  "chiesa": "chièṡa",
+  "paese": "paéṡe",
+  "spesa": "spéṡa",
+  "inglese": "ingléṡe",
+  "glicine": "glìcine",
+  "glicemia": "glicemìa",
+  "anglicano": "anglicàno",
+  "negligente": "negligènte",
+  "scienza": "sciènza",
+  "cielo": "cièlo",
+  "cieco": "cièco",
+  "societa": "società",
+  "uno": "ùno",
+  "due": "dùe",
+  "quattro": "quàttro",
+  "cinque": "cìnque",
+  "dieci": "dièci",
+  "undici": "ùndici",
+  "dodici": "dódici",
+  "tredici": "trédici",
+  "quattordici": "quattórdici",
+  "quindici": "quìndici",
+  "sedici": "sédici",
+  "mille": "mìlle",
+  "mila": "mìla",
+  "milione": "milióne",
+  "milioni": "milióni",
+  "miliardo": "miliàrdo",
+  "miliardi": "miliàrdi",
+  "euro": "èuro",
+  "europa": "euròpa",
+  "auto": "àuto",
+  "aereo": "aèreo",
+  "idea": "idèa",
+  "reale": "reàle",
+  "leone": "leóne",
+  "mercoledi": "mercoledì",
+  "lunedi": "lunedì",
+  "martedi": "martedì",
+  "giovedi": "giovedì",
+  "venerdi": "venerdì",
+  "virgola": "vìrgola",
+  "chilometri": "chilòmetri",
+  "chilometro": "chilòmetro",
+  "centimetri": "centìmetri",
+  "centimetro": "centìmetro",
+  "millimetri": "millìmetri",
+  "millimetro": "millìmetro",
+  "chili": "chìli",
+  "grammi": "gràmmi",
+  "litri": "lìtri",
+  "metri": "mètri",
+  "metro": "mètro",
+  "gradi": "gràdi",
+  "ettari": "ettàri",
+  "orari": "oràri",
+  "centesimi": "centèṡimi",
+  "centesimo": "centèṡimo",
+  "eccetera": "eccètera",
+  "signora": "signóra",
+  "signore": "signóre",
+  "dottore": "dottóre",
+  "dottoressa": "dottorèssa",
+  "professoressa": "professorèssa",
+  "ingegnere": "ingegnère",
+  "avvocato": "avvocàto",
+  "chiocciola": "chiòcciola",
+  "tivu": "tivù",
+  "ics": "ìcs",
+  "ipsilon": "ìpsilon",
+  "acca": "àcca",
+  "cappa": "càppa",
+  "effe": "èffe",
+  "elle": "èlle",
+  "emme": "èmme",
+  "enne": "ènne",
+  "erre": "èrre",
+  "esse": "èsse",
+  "zeta": "żèta",
+  "doppia": "dóppia",
+  "lunga": "lùnga",
+  "stakeholder": "stèicolder",
+  "computer": "compiùter",
+  "web": "uèb",
+  "email": "imèil",
+  "mail": "mèil",
+  "sport": "spòrt",
+  "film": "fìlm",
+  "bar": "bàr",
+  "weekend": "uìkend",
+  "online": "onlàin",
+  "smartphone": "smàrtfon",
+  "erano": "èrano",
+  "furono": "fùrono",
+  "trovano": "tròvano",
+  "formano": "fórmano",
+  "usano": "ùṡano",
+  "possano": "pòssano",
+  "trattano": "tràttano",
+  "riguardano": "riguàrdano",
+  "ospita": "òspita",
+  "ospitano": "òspitano",
+  "termina": "tèrmina",
+  "terminano": "tèrminano",
+  "visita": "vìṡita",
+  "visite": "vìṡite",
+  "vendita": "véndita",
+  "vendite": "véndite",
+  "nascita": "nàscita",
+  "scatola": "scàtola",
+  "scatole": "scàtole",
+  "isola": "ìṡola",
+  "isole": "ìṡole",
+  "opera": "òpera",
+  "opere": "òpere",
+  "genere": "gènere",
+  "generi": "gèneri",
+  "codice": "còdice",
+  "codici": "còdici",
+  "analisi": "anàliṡi",
+  "ipotesi": "ipòteṡi",
+  "limite": "lìmite",
+  "limiti": "lìmiti",
+  "semplice": "sémplice",
+  "semplici": "sémplici",
+  "alberi": "àlberi",
+  "uomini": "uòmini",
+  "anima": "ànima",
+  "ambito": "àmbito",
+  "metodo": "mètodo",
+  "fenomeno": "fenòmeno",
+  "fenomeni": "fenòmeni",
+  "vittima": "vìttima",
+  "vittime": "vìttime",
+  "tramite": "tràmite",
+  "timpano": "tìmpano",
+  "sindaco": "sìndaco",
+  "scheletro": "schèletro",
+  "polvere": "pólvere",
+  "nuvole": "nùvole",
+  "epoca": "època",
+  "dollari": "dòllari",
+  "dialogo": "diàlogo",
+  "dialoghi": "diàloghi",
+  "carattere": "caràttere",
+  "abiti": "àbiti",
+  "giudice": "giùdice",
+  "cadavere": "cadàvere",
+  "area": "àrea",
+  "aree": "àree",
+  "laurea": "làurea",
+  "video": "vìdeo",
+  "linea": "lìnea",
+  "linee": "lìnee",
+  "suocera": "suòcera",
+  "mobili": "mòbili",
+  "immobile": "immòbile",
+  "utili": "ùtili",
+  "simili": "sìmili",
+  "regole": "règole",
+  "regola": "règola",
+  "federica": "federìca",
+  "richiamala": "richiàmala",
+  "richiamalo": "richiàmalo",
+  "chiamala": "chiàmala",
+  "chiamalo": "chiàmalo",
+  "aver": "avér",
+  "poter": "potér",
+  "voler": "volér",
+  "saper": "sapér",
+  "tener": "tenér",
+  "dover": "dovér",
+  "esser": "èsser",
+  "parola": "paròla",
+  "parole": "paròle",
+  "figliolo": "figliòlo",
+  "paola": "pàola",
+  "regime": "regìme",
+  "sublime": "sublìme",
+  "perdono": "perdóno",
+  "abbandono": "abbandóno",
+  "patrono": "patróno",
+  "radice": "radìce",
+  "radici": "radìci",
+  "cornice": "cornìce",
+  "felice": "felìce",
+  "felici": "felìci",
+  "narice": "narìce",
+  "vernice": "vernìce",
+  "matrice": "matrìce",
+  "appendice": "appendìce",
+  "beatrice": "beatrìce",
+  "internet": "ìnternet",
+  "rapper": "rèpper",
+  "team": "tìm",
+  "community": "comiùniti",
+  "microsoft": "màicrosoft",
+  "gioia": "giòia",
+  "tuttavia": "tuttavìa",
+  "assemblea": "assemblèa",
+  "idee": "idèe",
+  "europeo": "europèo",
+  "museo": "muṡèo",
+  "liceo": "licèo",
+  "ottimo": "òttimo",
+  "massimo": "màssimo",
+  "minimo": "mìnimo",
+  "prossimi": "pròssimi",
+  "prossime": "pròssime",
+  "primo": "prìmo",
+  "prima": "prìma",
+  "decimo": "dècimo",
+  "cugino": "cugìno",
+  "pericolo": "perìcolo",
+  "spettacolo": "spettàcolo",
+  "singolo": "sìngolo",
+  "singola": "sìngola",
+  "dovevano": "dovévano",
+  "potevano": "potévano",
+  "cammino": "cammìno",
+  "bambino": "bambìno",
+  "ragione": "ragióne",
+  "italiano": "italiàno",
+  "italiana": "italiàna",
+  "ricevere": "ricevère",
+  "vedere": "vedére",
+  "sapere": "sapére",
+  "potere": "potére",
+  "volere": "volére",
+  "dovere": "dovére",
+  "avere": "avére",
+  "piacere": "piacére",
+  "tacere": "tacére",
+  "sedere": "sedére",
+  "cadere": "cadére",
+  "parere": "parére",
+  "rimanere": "rimanére",
+  "tenere": "tenére",
+  "valere": "valére",
+  "godere": "godére",
+  "temere": "temére",
+  "bere": "bére",
+  "spagnolo": "spagnòlo",
+  "spagnola": "spagnòla",
+  "spagnoli": "spagnòli",
+  "spagnole": "spagnòle",
+  "pistola": "pistòla",
+  "pistole": "pistòle",
+  "bugie": "bugìe",
+  "magie": "magìe",
+  "follie": "follìe",
+  "pazzie": "pazzìe",
+  "allegrie": "allegrìe",
+  "polizie": "polizìe",
+  "farmacie": "farmacìe",
+  "energie": "energìe",
+  "malattie": "malattìe",
+  "compagnie": "compagnìe",
+  "fantasie": "fantaṡìe",
+  "poesie": "poeṡìe",
+  "geografie": "geografìe",
+  "filosofie": "filoṡofìe",
+  "economie": "economìe",
+  "nostalgie": "nostalgìe",
+  "strategie": "strategìe",
+  "simpatie": "simpatìe",
+  "gelosie": "geloṡìe",
+  "cortesie": "corteṡìe",
+  "borghesie": "borgheṡìe",
+  "armonie": "armonìe",
+  "sinfonie": "sinfonìe",
+  "melodie": "melodìe",
+  "lombardie": "lombardìe",
+  "turchie": "turchìe",
+  "albanie": "albanìe",
+  "romanie": "romanìe",
+  "bulgarie": "bulgarìe",
+  "agonie": "agonìe",
+  "anomalie": "anomalìe",
+  "categorie": "categorìe",
+  "teorie": "teorìe",
+  "ironie": "ironìe",
+  "ipocrisie": "ipocriṡìe",
+  "eutanasie": "eutanaṡìe",
+  "anestesie": "anesteṡìe",
+  "amnesie": "amneṡìe",
+  "scie": "scìe",
+  "mattie": "mattìe",
+  "sofie": "sofìe",
+  "elie": "elìe",
+  "lucie": "lucìe",
+  "marie": "marìe",
+  "tunisie": "tuniṡìe",
+  "avarie": "avarìe",
+  "gallerie": "gallerìe",
+  "pavie": "pavìe",
+  "glicemie": "glicemìe",
+  "tuttavie": "tuttavìe",
+  "diversi": "divèrsi",
+  "diverse": "divèrse",
+  "universi": "univèrsi",
+  "nicola": "nicòla",
+  "asino": "àṡino",
+  "esposito": "espòṡito",
+  "proposito": "propòṡito",
+  "fattoria": "fattorìa",
+  "fattorie": "fattorìe",
+  "corsia": "corsìa",
+  "agenzia": "agenzìa",
+  "agenzie": "agenzìe",
+  "scrivania": "scrivanìa",
+  "diocesi": "diòceṡi",
+  "genesi": "gèneṡi",
+  "uffici": "uffìci",
+  "edifici": "edifìci",
+  "sacrifici": "sacrifìci",
+  "benefici": "benefìci",
+  "artifici": "artifìci",
+  "recupero": "recùpero",
+  "redditi": "rèdditi",
+  "reddito": "rèddito",
+  "ruderi": "rùderi",
+  "principi": "princìpi",
+  "orfani": "òrfani",
+  "ordini": "órdini",
+  "occupano": "òccupano",
+  "occupa": "òccupa",
+  "obbligo": "òbbligo",
+  "integrano": "ìntegrano",
+  "incubo": "ìncubo",
+  "incarichi": "incàrichi",
+  "incarico": "incàrico",
+  "immagini": "immàgini",
+  "immagine": "immàgine",
+  "esseri": "èsseri",
+  "eserciti": "eṡèrciti",
+  "dibattito": "dibàttito",
+  "dedicano": "dèdicano",
+  "considera": "consìdera",
+  "continuano": "contìnuano",
+  "cesare": "cèṡare",
+  "celebri": "cèlebri",
+  "cadaveri": "cadàveri",
+  "anatre": "ànatre",
+  "ambiti": "àmbiti",
+  "abitudini": "abitùdini",
+  "abitudine": "abitùdine",
+  "piroscafo": "piròscafo",
+  "presentano": "preṡèntano",
+  "diventano": "divèntano",
+  "fermano": "férmano",
+  "raccontaci": "raccòntaci",
+  "pensaci": "pènsaci",
+  "seggiola": "sèggiola",
+  "compiere": "cómpiere",
+  "festival": "fèstival",
+  "valor": "valór",
+  "tavoli": "tàvoli",
+  "diavoli": "diàvoli",
+  "open": "òpen",
+  "parametri": "paràmetri",
+  "parametro": "paràmetro",
+  "perimetro": "perìmetro",
+  "diametro": "diàmetro",
+  "geometra": "geòmetra",
+  "importo": "impòrto",
+  "importi": "impòrti",
+  "importa": "impòrta",
+  "importano": "impòrtano",
+  "marostica": "maròstica",
+  "ancore": "àncore",
+  "capitano": "capitàno",
+  "venti": "vénti",
+  "argine": "àrgine",
+  "argini": "àrgini",
+  "vergine": "vèrgine",
+  "facili": "fàcili",
+  "difficili": "diffìcili",
+  "docili": "dòcili",
+  "inutili": "inùtili",
+  "fertili": "fèrtili",
+  "agili": "àgili",
+  "fragili": "fràgili",
+  "vigili": "vìgili",
+  "nobili": "nòbili",
+  "immobili": "immòbili",
+  "deboli": "déboli"
+ },
+ "abbreviazioni": [
+  [
+   "sig.ra",
+   "signora"
+  ],
+  [
+   "sig.na",
+   "signorina"
+  ],
+  [
+   "sigg.",
+   "signori"
+  ],
+  [
+   "sig.",
+   "signor"
+  ],
+  [
+   "dott.ssa",
+   "dottoressa"
+  ],
+  [
+   "dott.",
+   "dottor"
+  ],
+  [
+   "prof.ssa",
+   "professoressa"
+  ],
+  [
+   "prof.",
+   "professor"
+  ],
+  [
+   "ing.",
+   "ingegner"
+  ],
+  [
+   "avv.",
+   "avvocato"
+  ],
+  [
+   "arch.",
+   "architetto"
+  ],
+  [
+   "geom.",
+   "geometra"
+  ],
+  [
+   "ecc.",
+   "eccetera"
+  ],
+  [
+   "pagg.",
+   "pagine"
+  ],
+  [
+   "pag.",
+   "pagina"
+  ],
+  [
+   "tel.",
+   "telefono"
+  ],
+  [
+   "art.",
+   "articolo"
+  ],
+  [
+   "cap.",
+   "capitolo"
+  ],
+  [
+   "p.es.",
+   "per esempio"
+  ],
+  [
+   "es.",
+   "esempio"
+  ],
+  [
+   "ca.",
+   "circa"
+  ],
+  [
+   "p.zza",
+   "piazza"
+  ],
+  [
+   "v.le",
+   "viale"
+  ],
+  [
+   "c.so",
+   "corso"
+  ],
+  [
+   "S.p.A.",
+   "esse pi a"
+  ],
+  [
+   "s.p.a.",
+   "esse pi a"
+  ],
+  [
+   "S.r.l.",
+   "esse erre elle"
+  ],
+  [
+   "s.r.l.",
+   "esse erre elle"
+  ],
+  [
+   "N.B.",
+   "nota bene"
+  ],
+  [
+   "c/o",
+   "presso"
+  ]
+ ],
+ "unita": [
+  [
+   "km/h",
+   "chilometro orario",
+   "chilometri orari"
+  ],
+  [
+   "kWh",
+   "chilowattora",
+   "chilowattora"
+  ],
+  [
+   "km",
+   "chilometro",
+   "chilometri"
+  ],
+  [
+   "cm",
+   "centimetro",
+   "centimetri"
+  ],
+  [
+   "mm",
+   "millimetro",
+   "millimetri"
+  ],
+  [
+   "kg",
+   "chilo",
+   "chili"
+  ],
+  [
+   "mg",
+   "milligrammo",
+   "milligrammi"
+  ],
+  [
+   "ml",
+   "millilitro",
+   "millilitri"
+  ],
+  [
+   "m²",
+   "metro quadrato",
+   "metri quadrati"
+  ],
+  [
+   "m2",
+   "metro quadrato",
+   "metri quadrati"
+  ],
+  [
+   "mq",
+   "metro quadrato",
+   "metri quadrati"
+  ],
+  [
+   "m³",
+   "metro cubo",
+   "metri cubi"
+  ],
+  [
+   "mc",
+   "metro cubo",
+   "metri cubi"
+  ],
+  [
+   "kW",
+   "chilowatt",
+   "chilowatt"
+  ],
+  [
+   "MB",
+   "megabyte",
+   "megabyte"
+  ],
+  [
+   "GB",
+   "gigabyte",
+   "gigabyte"
+  ],
+  [
+   "°C",
+   "grado",
+   "gradi"
+  ],
+  [
+   "m",
+   "metro",
+   "metri"
+  ],
+  [
+   "g",
+   "grammo",
+   "grammi"
+  ],
+  [
+   "l",
+   "litro",
+   "litri"
+  ],
+  [
+   "h",
+   "ora",
+   "ore"
+  ],
+  [
+   "min",
+   "minuto",
+   "minuti"
+  ]
+ ],
+ "mesi": [
+  "gennaio",
+  "febbraio",
+  "marzo",
+  "aprile",
+  "maggio",
+  "giugno",
+  "luglio",
+  "agosto",
+  "settembre",
+  "ottobre",
+  "novembre",
+  "dicembre"
+ ],
+ "lettere_nomi": {
+  "a": "a",
+  "b": "bi",
+  "c": "ci",
+  "d": "di",
+  "e": "e",
+  "f": "effe",
+  "g": "gi",
+  "h": "acca",
+  "i": "i",
+  "j": "i lunga",
+  "k": "cappa",
+  "l": "elle",
+  "m": "emme",
+  "n": "enne",
+  "o": "o",
+  "p": "pi",
+  "q": "cu",
+  "r": "erre",
+  "s": "esse",
+  "t": "ti",
+  "u": "u",
+  "v": "vu",
+  "w": "doppia vu",
+  "x": "ics",
+  "y": "ipsilon",
+  "z": "zeta"
+ },
+ "sigle": {
+  "TV": "tivù",
+  "INPS": "inps",
+  "USA": "usa",
+  "RAI": "rai",
+  "ONU": "onu",
+  "IVA": "iva",
+  "NATO": "nato",
+  "FIAT": "fiat",
+  "ANAS": "anas",
+  "ISTAT": "istat",
+  "ARPAV": "arpav",
+  "UE": "u e",
+  "IRPEF": "irpef",
+  "IMU": "imu",
+  "TAR": "tar",
+  "CAP": "cap",
+  "ASL": "a esse elle",
+  "ULSS": "ulss",
+  "COVID": "covid",
+  "LED": "led",
+  "GPS": "gi pi esse",
+  "PIN": "pin",
+  "SMS": "esse emme esse",
+  "OK": "okay"
+ },
+ "simboli": [
+  [
+   "&",
+   " e "
+  ],
+  [
+   "+",
+   " più "
+  ],
+  [
+   "=",
+   " uguale "
+  ],
+  [
+   "@",
+   " chiocciola "
+  ],
+  [
+   "#",
+   " "
+  ],
+  [
+   "*",
+   " "
+  ],
+  [
+   "/",
+   " "
+  ],
+  [
+   "_",
+   " "
+  ],
+  [
+   "|",
+   " "
+  ],
+  [
+   "<",
+   " "
+  ],
+  [
+   ">",
+   " "
+  ],
+  [
+   "~",
+   " "
+  ],
+  [
+   "^",
+   " "
+  ],
+  [
+   "\\",
+   " "
+  ]
+ ],
+ "lettere_straniere": {
+  "ç": "s",
+  "ñ": "gn",
+  "ü": "u",
+  "ö": "o",
+  "ä": "e",
+  "ß": "ss",
+  "æ": "e",
+  "œ": "e",
+  "ø": "o",
+  "å": "o",
+  "ã": "a",
+  "õ": "o",
+  "â": "a",
+  "ê": "e",
+  "î": "i",
+  "ô": "o",
+  "û": "u",
+  "ë": "e",
+  "ï": "i",
+  "ÿ": "i",
+  "á": "à",
+  "ý": "ì"
+ },
+ "gl_duro": [
+  "glicin",
+  "glicem",
+  "glicer",
+  "anglican",
+  "neglig",
+  "geroglif",
+  "glifo",
+  "ganglio",
+  "glittic"
+ ],
+ "zz_sonora": [
+  "izz(are|ato|ata|ati|ate|azione|azioni|ando|iamo|avo|ava|avano|erà|erò|eremo|erebbe|erebbero)$",
+  "[a-z]{4,}izz(a|o|i|ano|ino)$",
+  "azzurr",
+  "brezz",
+  "olezz",
+  "rozz",
+  "^mezz",
+  "gazzett"
+ ],
+ "suffissi_regex": [
+  [
+   "(bb|cc|dd|ff|gg|ll|mm|nn|pp|rr|tt|vv|zz|rs|ns|ls|rv)ero$|ecero$",
+   3
+  ],
+  [
+   "(end|ess|ond|ung|olg|id|lud|ett|att|ing|ang|uov|iv|sc|orr|gli|omp|erg|ist|ugg|egg|ell|ett)er(e|si|ci|lo|la|li|le|ne|mi|ti|vi|gli)$",
+   3
+  ],
+  [
+   "[bcdgmnpstv]ol[aoei]$",
+   3
+  ],
+  [
+   "i(mo|ma|mi)$",
+   3
+  ],
+  [
+   "[aiou][lnr]$|e[ln]$",
+   1
+  ]
+ ],
+ "suffissi_tonici": [
+  [
+   "logia",
+   2
+  ],
+  [
+   "urgia",
+   2
+  ],
+  [
+   "ergia",
+   2
+  ],
+  [
+   "algia",
+   2
+  ],
+  [
+   "grafia",
+   2
+  ],
+  [
+   "sofia",
+   2
+  ],
+  [
+   "fobia",
+   2
+  ],
+  [
+   "patia",
+   2
+  ],
+  [
+   "crazia",
+   2
+  ],
+  [
+   "metria",
+   2
+  ],
+  [
+   "nomia",
+   2
+  ],
+  [
+   "fonia",
+   2
+  ],
+  [
+   "terapia",
+   2
+  ],
+  [
+   "scopia",
+   2
+  ],
+  [
+   "eria",
+   2
+  ],
+  [
+   "due",
+   2
+  ],
+  [
+   "aica",
+   3
+  ],
+  [
+   "aico",
+   3
+  ],
+  [
+   "aici",
+   3
+  ],
+  [
+   "aiche",
+   4
+  ],
+  [
+   "oico",
+   3
+  ],
+  [
+   "oica",
+   3
+  ],
+  [
+   "oici",
+   3
+  ],
+  [
+   "oiche",
+   4
+  ]
+ ],
+ "nota_omografi": "omografi: per parola (senza accenti), regole [regex sulla parola precedente, grafia con l'accento]; la prima che vale vince, altrimenti il lessico",
+ "omografi": {
+  "importi": [
+   [
+    "^(di|a|per|senza|da|devi|puoi|vuoi|sai|deve|può|possono|devono|vogliono|riesci|prova|potresti|dovresti|vorresti|cerca|smetti|evita|non)$",
+    "impórti"
+   ]
+  ],
+  "ancora": [
+   [
+    "^(l|un|una|la|sull|dell|all|nell|dall|quell|un')$",
+    "àncora"
+   ]
+  ],
+  "subito": [
+   [
+    "^(ho|hai|ha|abbiamo|avete|hanno|aveva|avevano|avere|avendo|avrà|ebbe|essere|stato)$",
+    "subìto"
+   ]
+  ],
+  "subita": [
+   [
+    "^(ho|hai|ha|abbiamo|avete|hanno|aveva|avevano|avere|avendo|stata|essere)$",
+    "subìta"
+   ]
+  ],
+  "capitano": [
+   [
+    "^(non|mi|ti|ci|vi|gli|le|si|che|cose|spesso)$",
+    "càpitano"
+   ]
+  ],
+  "venti": [
+   [
+    "^(i|dei|ai|dai|coi|nei|sui|forti|caldi|freddi)$",
+    "vènti"
+   ]
+  ]
+ }
+}

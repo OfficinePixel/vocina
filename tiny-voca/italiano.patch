@@ -1,0 +1,275 @@
+From d61f152312798e08c3555d2e4e250b73984c7504 Mon Sep 17 00:00:00 2001
+From: bancollm <pixel@officinepixel.com>
+Date: Tue, 17 Nov 2026 15:11:26 +0100
+Subject: [PATCH 1/3] Fork italiano: TINY_VOCA_LINGUA=it, inventario di 49
+ simboli, doppie come due fonemi, dz allineato come ts
+
+---
+ src/tiny_voca/align.py  |  2 +-
+ src/tiny_voca/config.py |  6 ++--
+ src/tiny_voca/text.py   | 64 +++++++++++++++++++++++++++++------------
+ 3 files changed, 50 insertions(+), 22 deletions(-)
+
+diff --git a/src/tiny_voca/align.py b/src/tiny_voca/align.py
+index b0ff756..c82be63 100644
+--- a/src/tiny_voca/align.py
++++ b/src/tiny_voca/align.py
+@@ -43,7 +43,7 @@ ALIGNMENT_VERSION = 2
+ PAUSING = (",", ".", "?", "!", ";", ":", "—", "…")
+ # Every inventory phone is a label of the recogniser (checked when it loads);
+ # only the unknown-phone token needs a stand-in.
+-ALIGNER_LABEL_FALLBACK = {UNK: "<unk>"}
++ALIGNER_LABEL_FALLBACK = {UNK: "<unk>", "dz": "ts"}  # dz manca fra le etichette: la più vicina per forma
+ 
+ 
+ @dataclass(frozen=True)
+diff --git a/src/tiny_voca/config.py b/src/tiny_voca/config.py
+index 735fe4e..2699085 100644
+--- a/src/tiny_voca/config.py
++++ b/src/tiny_voca/config.py
+@@ -2,6 +2,8 @@ from dataclasses import asdict, dataclass
+ import hashlib
+ import json
+ 
++from .text import LANGUAGE, SYMBOLS as _SYMBOLS
++
+ CHECKPOINT_FORMAT = 4  # 2-3: byte tokens + learned aligner (rejected explicitly).
+ ANNOTATION_VERSION = 3
+ 
+@@ -19,9 +21,9 @@ class Config:
+     n_mels: int = 80
+     f0_min: float = 50.0
+     f0_max: float = 600.0
+-    speakers: tuple[str, ...] = ("F2", "M2")
++    speakers: tuple[str, ...] = ("F2", "M2") if LANGUAGE == "en" else ("I1",)
+     # Phoneme tokens from tiny_voca.text.SYMBOLS (front-end version 3).
+-    vocab_size: int = 76
++    vocab_size: int = len(_SYMBOLS)  # 76 in inglese
+     # Text encoder and frame-level transformer.
+     channels: int = 192
+     heads: int = 4
+diff --git a/src/tiny_voca/text.py b/src/tiny_voca/text.py
+index a1f4484..6a776e1 100644
+--- a/src/tiny_voca/text.py
++++ b/src/tiny_voca/text.py
+@@ -39,10 +39,15 @@ import subprocess
+ import unicodedata
+ 
+ FRONTEND_VERSION = 3
+-ESPEAK_VOICE = "en-us"
+ SEPARATOR = "_"
+ FRONTENDS = ("espeak", "own")
+ FRONTEND_VARIABLE = "TINY_VOCA_FRONTEND"
++# Lingua (fork italiano di bancollm): TINY_VOCA_LINGUA=it sceglie inventario, voce di eSpeak e ripieghi.
++LANGUAGE_VARIABLE = "TINY_VOCA_LINGUA"
++LANGUAGE = os.environ.get(LANGUAGE_VARIABLE, "en")
++if LANGUAGE not in ("en", "it"):
++    raise ValueError(f"{LANGUAGE_VARIABLE} must be en or it, not {LANGUAGE!r}")
++ESPEAK_VOICE = "it" if LANGUAGE == "it" else "en-us"
+ _frontend = os.environ.get(FRONTEND_VARIABLE, "espeak")
+ if _frontend not in FRONTENDS:
+     raise ValueError(f"{FRONTEND_VARIABLE} must be one of {FRONTENDS}, not {_frontend!r}")
+@@ -50,37 +55,51 @@ if _frontend not in FRONTENDS:
+ PAD, BOS, EOS, SP, UNK = "<pad>", "<bos>", "<eos>", "<sp>", "<unk>"
+ SPECIALS = (PAD, BOS, EOS, SP, UNK)
+ PUNCTUATION = (",", ".", "?", "!", ";", ":", '"', "'", "(", ")", "—", "…")
+-CONSONANTS = ("p", "b", "t", "d", "k", "ɡ", "f", "v", "θ", "ð", "s", "z", "ʃ", "ʒ", "h",
+-              "m", "n", "ŋ", "l", "ɹ", "j", "w", "tʃ", "dʒ", "ɾ", "ʔ")
+-VOWELS = ("ə", "ɐ", "ɚ", "ᵻ", "ɪ", "i", "iː", "ɛ", "æ", "ʌ", "ɑː", "ɔ", "ɔː", "ʊ", "uː", "ɜː",
+-          "eɪ", "aɪ", "ɔɪ", "oʊ", "aʊ", "iə", "oː",
+-          "ɑːɹ", "ɔːɹ", "oːɹ", "ɪɹ", "ɛɹ", "ʊɹ", "aɪɚ", "aɪə", "əl", "n̩")
++if LANGUAGE == "it":
++    # Le doppie sono due fonemi uguali (vedi canonical): il riconoscitore non ha
++    # etichette lunghe per tutte le consonanti, e la durata la impara il modello.
++    CONSONANTS = ("p", "b", "t", "d", "k", "ɡ", "f", "v", "s", "z", "ʃ", "m", "n", "ɲ", "ŋ",
++                  "l", "ʎ", "r", "ɾ", "j", "w", "ts", "dz", "tʃ", "dʒ")
++    VOWELS = ("a", "e", "ɛ", "i", "o", "ɔ", "u")
++    VOICELESS = frozenset(("p", "t", "k", "f", "s", "ʃ", "ts", "tʃ"))
++    FALLBACK = {
++        "ɪ": ("i",), "ʊ": ("u",), "ə": ("e",), "ɐ": ("a",), "æ": ("ɛ",), "ʌ": ("a",), "ɑ": ("a",), "ɒ": ("ɔ",),
++        "y": ("u",), "ø": ("e",), "œ": ("ɛ",), "ɹ": ("r",), "ʁ": ("r",), "h": (), "x": ("k",), "θ": ("t",),
++        "ð": ("d",), "ʒ": ("dʒ",), "ɱ": ("m",), "ç": ("ʃ",), "ɣ": ("ɡ",), "β": ("v",),
++        "eɪ": ("e", "i"), "aɪ": ("a", "i"), "aʊ": ("a", "u"), "oʊ": ("o", "u"), "ɔɪ": ("ɔ", "i"),
++    }
++    ABBREVIATIONS = {"sig", "sigg", "dott", "dr", "prof", "ing", "avv", "ecc", "geom", "arch", "sez", "pag", "tel", "n"}
++else:
++    CONSONANTS = ("p", "b", "t", "d", "k", "ɡ", "f", "v", "θ", "ð", "s", "z", "ʃ", "ʒ", "h",
++                  "m", "n", "ŋ", "l", "ɹ", "j", "w", "tʃ", "dʒ", "ɾ", "ʔ")
++    VOWELS = ("ə", "ɐ", "ɚ", "ᵻ", "ɪ", "i", "iː", "ɛ", "æ", "ʌ", "ɑː", "ɔ", "ɔː", "ʊ", "uː", "ɜː",
++              "eɪ", "aɪ", "ɔɪ", "oʊ", "aʊ", "iə", "oː",
++              "ɑːɹ", "ɔːɹ", "oːɹ", "ɪɹ", "ɛɹ", "ʊɹ", "aɪɚ", "aɪə", "əl", "n̩")
++    VOICELESS = frozenset(("p", "t", "k", "f", "θ", "s", "ʃ", "h", "tʃ", "ʔ"))
++    # eSpeak phonemes outside the inventory (foreign words, rare allophones) map to
++    # the closest inventory phone(s). Anything else becomes <unk> and is reported.
++    FALLBACK = {
++        "r": ("ɹ",), "ɻ": ("ɹ",), "ʁ": ("ɹ",), "x": ("k",), "ç": ("h",), "ɬ": ("l",), "ɫ": ("l",), "ɲ": ("n", "j"),
++        "ts": ("t", "s"), "dz": ("d", "z"), "β": ("v",), "ɣ": ("ɡ",), "ʎ": ("l", "j"),
++        "a": ("æ",), "aː": ("ɑː",), "ɑ": ("ɑː",), "ɒ": ("ɑː",), "ɑ̃": ("ɑː",), "ɔ̃": ("ɔː",), "ɛ̃": ("æ",),
++        "e": ("eɪ",), "eː": ("eɪ",), "o": ("oʊ",), "u": ("uː",), "y": ("uː",), "yː": ("uː",),
++        "ø": ("ɜː",), "øː": ("ɜː",), "œ": ("ɜː",), "ɜ": ("ɜː",), "ɛː": ("ɛ",), "ɪː": ("ɪ",),
++        "əʊ": ("oʊ",), "eə": ("ɛɹ",), "ɪə": ("iə",), "ʊə": ("ʊɹ",), "aʊɚ": ("aʊ", "ɚ"), "l̩": ("əl",), "m̩": ("ə", "m"),
++    }
++    ABBREVIATIONS = {"mr", "mrs", "ms", "dr", "prof", "st", "jr", "sr", "vs", "etc"}
+ PHONES = CONSONANTS + VOWELS
+ # Append-only: changing the order or removing a symbol invalidates checkpoints.
+ SYMBOLS = SPECIALS + PUNCTUATION + PHONES
+ SYMBOL_TO_ID = {symbol: index for index, symbol in enumerate(SYMBOLS)}
+ PHONE_SET = frozenset(PHONES)
+ PHONE_IDS = frozenset(SYMBOL_TO_ID[p] for p in PHONES) | {SYMBOL_TO_ID[UNK]}
+-VOICELESS = frozenset(("p", "t", "k", "f", "θ", "s", "ʃ", "h", "tʃ", "ʔ"))
+ VOWEL_SET = frozenset(VOWELS)
+ STRESS_MARKS = {"ˈ": 1, "ˌ": 2}
+ 
+-# eSpeak phonemes outside the inventory (foreign words, rare allophones) map to
+-# the closest inventory phone(s). Anything else becomes <unk> and is reported.
+-FALLBACK = {
+-    "r": ("ɹ",), "ɻ": ("ɹ",), "ʁ": ("ɹ",), "x": ("k",), "ç": ("h",), "ɬ": ("l",), "ɫ": ("l",), "ɲ": ("n", "j"),
+-    "ts": ("t", "s"), "dz": ("d", "z"), "β": ("v",), "ɣ": ("ɡ",), "ʎ": ("l", "j"),
+-    "a": ("æ",), "aː": ("ɑː",), "ɑ": ("ɑː",), "ɒ": ("ɑː",), "ɑ̃": ("ɑː",), "ɔ̃": ("ɔː",), "ɛ̃": ("æ",),
+-    "e": ("eɪ",), "eː": ("eɪ",), "o": ("oʊ",), "u": ("uː",), "y": ("uː",), "yː": ("uː",),
+-    "ø": ("ɜː",), "øː": ("ɜː",), "œ": ("ɜː",), "ɜ": ("ɜː",), "ɛː": ("ɛ",), "ɪː": ("ɪ",),
+-    "əʊ": ("oʊ",), "eə": ("ɛɹ",), "ɪə": ("iə",), "ʊə": ("ʊɹ",), "aʊɚ": ("aʊ", "ɚ"), "l̩": ("əl",), "m̩": ("ə", "m"),
+-}
+-
+ _QUOTES = str.maketrans({"‘": "'", "’": "'", "‚": "'", "‛": "'", "`": "'", "´": "'",
+                          "“": '"', "”": '"', "„": '"', "‟": '"', "«": '"', "»": '"',
+                          "–": "—", "―": "—", "[": "(", "{": "(", "]": ")", "}": ")"})
+ _PUNCTUATION_CHARS = frozenset(PUNCTUATION)
+-ABBREVIATIONS = {"mr", "mrs", "ms", "dr", "prof", "st", "jr", "sr", "vs", "etc"}
+ _LANGUAGE_TAG = re.compile(r"\((?:_?[a-z0-9]_?){2,3}(?:-(?:_?[a-z0-9]_?)+)*\)")
+ 
+ 
+@@ -223,6 +242,13 @@ def canonical(phone):
+     """Map an eSpeak phoneme to inventory phones; ``None`` when unknown."""
+     if phone in PHONE_SET:
+         return (phone,)
++    if LANGUAGE == "it":
++        # Doppie: «kː», «tsː» oppure «ss» diventano due fonemi uguali.
++        if phone.endswith("ː") and phone[:-1] in CONSONANTS:
++            return (phone[:-1], phone[:-1])
++        half = len(phone) // 2
++        if len(phone) % 2 == 0 and phone[:half] == phone[half:] and phone[:half] in CONSONANTS:
++            return (phone[:half], phone[:half])
+     if phone in FALLBACK:
+         return FALLBACK[phone]
+     stripped = "".join(c for c in unicodedata.normalize("NFD", phone) if not unicodedata.combining(c))
+-- 
+2.56.0
+
+
+From 557b474ce301c710a4743f88d18fa4693595ea92 Mon Sep 17 00:00:00 2001
+From: bancollm <pixel@officinepixel.com>
+Date: Wed, 18 Nov 2026 10:32:19 +0100
+Subject: [PATCH 2/3] Italiano: frontend own con il G2P di bancollm (g2p_it),
+ voci da TINY_VOCA_VOCI
+
+---
+ src/tiny_voca/config.py |  4 +++-
+ src/tiny_voca/text.py   | 18 ++++++++++++++++++
+ 2 files changed, 21 insertions(+), 1 deletion(-)
+
+diff --git a/src/tiny_voca/config.py b/src/tiny_voca/config.py
+index 2699085..94986ba 100644
+--- a/src/tiny_voca/config.py
++++ b/src/tiny_voca/config.py
+@@ -1,3 +1,4 @@
++import os
+ from dataclasses import asdict, dataclass
+ import hashlib
+ import json
+@@ -21,7 +22,8 @@ class Config:
+     n_mels: int = 80
+     f0_min: float = 50.0
+     f0_max: float = 600.0
+-    speakers: tuple[str, ...] = ("F2", "M2") if LANGUAGE == "en" else ("I1",)
++    # Italiano: TINY_VOCA_VOCI="I1,I2" per il modello a due voci (il pilota ne ha una).
++    speakers: tuple[str, ...] = ("F2", "M2") if LANGUAGE == "en" else tuple(os.environ.get("TINY_VOCA_VOCI", "I1").split(","))
+     # Phoneme tokens from tiny_voca.text.SYMBOLS (front-end version 3).
+     vocab_size: int = len(_SYMBOLS)  # 76 in inglese
+     # Text encoder and frame-level transformer.
+diff --git a/src/tiny_voca/text.py b/src/tiny_voca/text.py
+index 6a776e1..b05d5c4 100644
+--- a/src/tiny_voca/text.py
++++ b/src/tiny_voca/text.py
+@@ -132,6 +132,17 @@ def set_frontend(name):
+     _frontend = name
+ 
+ 
++def _g2p_it():
++    """Il G2P italiano di bancollm (g2p_it.py, solo libreria standard), al posto di dizione per l'italiano."""
++    try:
++        import g2p_it
++    except ImportError as error:
++        raise RuntimeError('the "own" Italian front end needs g2p_it on the path (bancollm/voce/g2p_it)') from error
++    if tuple(g2p_it.SYMBOLS) != SYMBOLS:
++        raise RuntimeError("g2p_it's symbol inventory differs from this model's")
++    return g2p_it
++
++
+ def _dizione():
+     try:
+         import dizione
+@@ -143,6 +154,9 @@ def _dizione():
+ 
+ 
+ def frontend_identity():
++    if _frontend == "own" and LANGUAGE == "it":
++        g2p = _g2p_it()
++        return {"frontend_version": g2p.VERSIONE, "phonemizer": "g2p_it", "fingerprint": g2p.impronta(), "symbols": list(SYMBOLS)}
+     if _frontend == "own":
+         phonemizer = _dizione()
+         return {"frontend_version": phonemizer.VERSION, "phonemizer": "dizione", "symbols": list(SYMBOLS)}
+@@ -153,6 +167,8 @@ def frontend_identity():
+ def frontend_runtime():
+     """What an annotation run records about the exact program behind its
+     tokens: the eSpeak version, or the fingerprint of the phonemizer build."""
++    if _frontend == "own" and LANGUAGE == "it":
++        return {"phonemizer": _g2p_it().impronta()}
+     if _frontend == "own":
+         return {"phonemizer": _dizione().identity()["fingerprint"]}
+     return {"espeak_version": espeak_version()}
+@@ -295,6 +311,8 @@ def tokenize(pieces):
+ def phonemize(text):
+     if not isinstance(text, str) or not text.strip():
+         raise ValueError("text must not be empty")
++    if _frontend == "own" and LANGUAGE == "it":
++        return tokenize(_g2p_it().pezzi(text))
+     if _frontend == "own":
+         return tokenize(_dizione().pieces(text))
+     pieces = []
+-- 
+2.56.0
+
+
+From 0118bfa4b9c68ff1880d5b2e5fae0e0ec30e1358 Mon Sep 17 00:00:00 2001
+From: bancollm <pixel@officinepixel.com>
+Date: Wed, 18 Nov 2026 15:11:54 +0100
+Subject: [PATCH 3/3] Italiano: 8 simboli riservati in coda al vocabolario
+ (57), per suoni non verbali da insegnare con un affinamento
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+---
+ src/tiny_voca/text.py | 6 +++++-
+ 1 file changed, 5 insertions(+), 1 deletion(-)
+
+diff --git a/src/tiny_voca/text.py b/src/tiny_voca/text.py
+index b05d5c4..b256798 100644
+--- a/src/tiny_voca/text.py
++++ b/src/tiny_voca/text.py
+@@ -88,8 +88,12 @@ else:
+     }
+     ABBREVIATIONS = {"mr", "mrs", "ms", "dr", "prof", "st", "jr", "sr", "vs", "etc"}
+ PHONES = CONSONANTS + VOWELS
++# Riservati in coda (solo italiano, dal 2026-11-18): mai prodotti dal frontend, per insegnare più avanti
++# suoni non verbali con un affinamento, senza cambiare vocab_size. Non sono fonemi: come la punteggiatura,
++# il modello ne decide presenza e durata. Il pilota (49 simboli) non li ha.
++RESERVED = tuple(f"<riservato{i}>" for i in range(1, 9)) if LANGUAGE == "it" else ()
+ # Append-only: changing the order or removing a symbol invalidates checkpoints.
+-SYMBOLS = SPECIALS + PUNCTUATION + PHONES
++SYMBOLS = SPECIALS + PUNCTUATION + PHONES + RESERVED
+ SYMBOL_TO_ID = {symbol: index for index, symbol in enumerate(SYMBOLS)}
+ PHONE_SET = frozenset(PHONES)
+ PHONE_IDS = frozenset(SYMBOL_TO_ID[p] for p in PHONES) | {SYMBOL_TO_ID[UNK]}
+-- 
+2.56.0
+

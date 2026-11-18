@@ -1,0 +1,9 @@
+{
+  "name": "vocina-web",
+  "private": true,
+  "description": "onnxruntime-web per costruire la pagina di Vocina (vocina.py)",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "onnxruntime-web": "1.27.0"
+  }
+}

@@ -1,0 +1,27 @@
+:root { color-scheme: light dark; --accento: #2b6cb0; --tenue: #8886; }
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+body { font: 17px/1.55 system-ui, -apple-system, "Segoe UI", sans-serif; margin: 0 auto; max-width: 42rem; padding: 1rem 1rem 3rem; }
+header h1 { font-size: 2rem; margin: .4rem 0 0; letter-spacing: .02em; }
+.sotto { margin: .1rem 0 1rem; opacity: .8; }
+.presentazione p { margin: .5rem 0; }
+textarea { width: 100%; min-height: 8.5rem; font: inherit; padding: .6rem; border-radius: .6rem; border: 1px solid var(--tenue); margin-top: .4rem; }
+.riga { display: flex; flex-wrap: wrap; gap: .7rem; align-items: center; margin: .7rem 0; }
+button { font: inherit; padding: .6rem 1.3rem; border-radius: .6rem; border: 0; background: var(--accento); color: #fff; cursor: pointer; }
+button:disabled { opacity: .5; cursor: default; }
+button.secondario { background: transparent; color: var(--accento); border: 1px solid var(--accento); }
+label { display: flex; align-items: center; gap: .4rem; }
+select { font: inherit; padding: .3rem; border-radius: .4rem; }
+input[type=range] { width: 8rem; }
+.esempi { display: flex; flex-wrap: wrap; gap: .4rem; margin-top: 1rem; }
+.esempi button { padding: .3rem .75rem; font-size: .85rem; }
+#barra { height: .4rem; background: var(--tenue); border-radius: .2rem; overflow: hidden; }
+#riempi { height: 100%; width: 0; background: var(--accento); transition: width .2s; }
+#stato { font-size: .95rem; opacity: .85; min-height: 1.5em; }
+ol#frasi { padding-left: 1.4rem; }
+ol#frasi li { margin: .4rem 0; }
+.fonemi { font-family: ui-monospace, monospace; font-size: .78rem; opacity: .65; word-break: break-word; }
+footer { margin-top: 2rem; font-size: .9rem; }
+details { margin: .6rem 0; }
+summary { cursor: pointer; }
+a { color: var(--accento); }
