@@ -5,6 +5,7 @@ import { creaG2P, VERSIONE } from "./g2p_it.js";
 const qui = new URL(".", import.meta.url);
 const dati = JSON.parse(readFileSync(new URL("dati.json", qui), "utf8"));
 const { versione, vettori } = JSON.parse(readFileSync(new URL("vettori.json", qui), "utf8"));
+dati.wikizionario = JSON.parse(readFileSync(new URL("lessico_wikizionario.json", qui), "utf8")).voci;
 const g2p = creaG2P(dati);
 let errori = 0;
 if (versione !== VERSIONE) { console.log(`versione diversa: Python ${versione}, JS ${VERSIONE}`); errori++; }

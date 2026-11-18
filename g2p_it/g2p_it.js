@@ -23,6 +23,9 @@ export function creaG2P(DATI) {
   const LETTERE = "A-Za-zÀ-ÖØ-öø-ÿ";
   const ATONE = new Set(DATI.atone);
   const LESSICO = DATI.lessico;
+  // Lessico dal Wikizionario (CC BY-SA 4.0, lessico_wikizionario.json, campo «voci»): chi usa il G2P lo mette
+  // in DATI.wikizionario. Se manca, solo regole.
+  const WIKIZIONARIO = DATI.wikizionario ?? {};
   const OMOGRAFI = DATI.omografi;
   const perLunghezza = (a, b) => b[0].length - a[0].length;
   const SUFFISSI = [...DATI.suffissi_accento].sort(perLunghezza);
@@ -262,7 +265,7 @@ export function creaG2P(DATI) {
     }
     const piana = w.normalize("NFD").replace(/[̀-ͯ]/g, "");
     // Senza accenti si cerca solo se il testo non ne ha: «pensò» non è «penso».
-    let r = LESSICO[w] ?? (w === piana ? LESSICO[piana] : undefined) ?? w;
+    let r = LESSICO[w] || WIKIZIONARIO[w] || w;  // prima il lessico a mano, poi il Wikizionario
     for (const [regola, grafia] of OMOGRAFI[piana] ?? []) {
       if (new RegExp(regola).test(precedente)) { r = grafia; break; }
     }

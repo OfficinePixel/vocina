@@ -94,6 +94,7 @@ def costruisci(modello: Path, uscita: Path, pilota: bool, int8: bool = True) -> 
     (uscita / "ort" / "ort-wasm-simd-threaded.wasm.gz").write_bytes(gzip.compress(byte_wasm, 9, mtime=0))
     shutil.copy(G2P / "g2p_it.js", uscita / "g2p_it.js")
     shutil.copy(G2P / "dati.json", uscita / "dati.json")
+    shutil.copy(G2P / "lessico_wikizionario.json", uscita / "lessico_wikizionario.json")  # CC BY-SA 4.0
     shutil.copy(QUI / "tinyvoca_web.js", uscita / "tinyvoca_web.js")
     for nome in ("LICENSE", "NOTICE", "LICENSE-onnxruntime-web", "vocina.css"):
         shutil.copy(SORGENTE / nome, uscita / nome)
@@ -122,7 +123,8 @@ def _versiona(uscita: Path) -> None:
         "index.html": [('href="vocina.css"', f'href="vocina.css{v}"'), ('src="app.js"', f'src="app.js{v}"')],
         "app.js": [('"./ort/ort.wasm.bundle.min.js"', f'"./ort/ort.wasm.bundle.min.js{v}"'),
                    ('"./tinyvoca_web.js"', f'"./tinyvoca_web.js{v}"'),
-                   ('fetch("dati.json")', f'fetch("dati.json{v}")'), ('fetch("model.json")', f'fetch("model.json{v}")')],
+                   ('fetch("dati.json")', f'fetch("dati.json{v}")'), ('fetch("model.json")', f'fetch("model.json{v}")'),
+                   ('fetch("lessico_wikizionario.json")', f'fetch("lessico_wikizionario.json{v}")')],
         "tinyvoca_web.js": [('"./g2p_it.js"', f'"./g2p_it.js{v}"')],
     }
     for nome, coppie in sost.items():

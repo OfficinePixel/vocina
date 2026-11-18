@@ -117,7 +117,9 @@ try {
   const t0 = performance.now();
   $("barra").hidden = false;
   stato("Scarico il modello (solo la prima volta)…");
-  const [dati, metadati] = await Promise.all([fetch("dati.json").then((r) => r.json()), fetch("model.json").then((r) => r.json())]);
+  const [dati, metadati, wiki] = await Promise.all([fetch("dati.json").then((r) => r.json()), fetch("model.json").then((r) => r.json()),
+    fetch("lessico_wikizionario.json").then((r) => r.json())]);
+  dati.wikizionario = wiki.voci;  // lessico del Wikizionario, CC BY-SA 4.0
   const modello = await scarica("model.onnx?v={{VERSIONE}}", 0.8, 0);
   // Il wasm arriva compresso (il server non comprime): si scompatta qui. Se il browser l'ha già scompattato
   // (server che aggiunge Content-Encoding sui .gz) manca la firma gzip, e si usa così com'è.

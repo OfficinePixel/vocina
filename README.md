@@ -30,8 +30,17 @@ Tre passi:
 2. **Fonemi** con le regole dell'ortografia italiana: c e g dolci e dure, gn, gli, sc, qu, s e z sorde o
    sonore, doppie, n velare.
 3. **Accento** e **e/o aperte o chiuse**: dall'accento scritto, da un lessico di circa 760 voci scritto a
-   mano, da alcuni omografi decisi dalla parola prima («cerca di impórti» contro «cosa ti impòrti»), dai
+   mano, poi da un lessico di circa 15.000 voci ricavato dal Wiktionary (`lessico_wikizionario.json`, CC BY-SA
+   4.0), da alcuni omografi decisi dalla parola prima («cerca di impórti» contro «cosa ti impòrti»), dai
    suffissi, e altrimenti sulla penultima.
+
+Il lessico del Wiktionary contiene solo le parole che le regole sbagliano, e si rigenera con
+`python g2p_it/crea_lessico_wikizionario.py ita_latn_broad.tsv` dal file italiano di
+[WikiPron](https://github.com/CUNY-CL/wikipron). Sulle parole dei nostri testi, pesate per frequenza e
+confrontate con il Wiktionary, le e e le o aperte giuste passano dal 69% al 99,9% (`confronta_wikipron.py`).
+WikiPron però non riporta gli accenti, e la sillaba tonica si ricava solo dove c'è una ɛ o una ɔ: per le
+altre parole l'accento resta quello delle regole (per esempio «ricévere» è ancora letto «ricevére»). Il
+lessico va passato al G2P JS in `DATI.wikizionario`; quello Python lo legge da sé se il file c'è.
 
 ```python
 import sys; sys.path.insert(0, "g2p_it")
@@ -108,7 +117,8 @@ export PYTHONPATH=$PWD/../vocina/g2p_it
 
 ## Licenze
 
-Il codice e i pesi sono sotto **Apache 2.0** (`LICENSE`). Vocina deriva da tiny-voca di n4ze3m (Apache
+Il codice e i pesi sono sotto **Apache 2.0** (`LICENSE`), tranne `g2p_it/lessico_wikizionario.json`, che
+viene dal Wiktionary e resta sotto **CC BY-SA 4.0** (contributori del Wiktionary, estratto con WikiPron). Vocina deriva da tiny-voca di n4ze3m (Apache
 2.0): le modifiche sono elencate in `NOTICE`. La cartella costruita include ONNX Runtime Web (© Microsoft,
 MIT, `web/vocina/LICENSE-onnxruntime-web`). Dati: Common Voice italiano (CC0 1.0), voci generate con
 Qwen3-TTS (Apache 2.0). eSpeak NG (GPL-3.0) è servito solo come programma esterno per le etichette del

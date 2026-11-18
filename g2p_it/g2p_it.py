@@ -42,6 +42,9 @@ FONI = frozenset(CONSONANTI + VOCALI)
 LETTERE = "A-Za-zÀ-ÖØ-öø-ÿ"
 ATONE = frozenset(DATI["atone"])
 LESSICO = DATI["lessico"]
+# Lessico dal Wikizionario (CC BY-SA 4.0, file a parte: vedi crea_lessico_wikizionario.py). Se manca, solo regole.
+_WIKI = Path(__file__).with_name("lessico_wikizionario.json")
+WIKIZIONARIO = json.loads(_WIKI.read_text(encoding="utf-8"))["voci"] if _WIKI.exists() else {}
 OMOGRAFI = DATI["omografi"]
 SUFFISSI = sorted(DATI["suffissi_accento"], key=lambda s: -len(s[0]))
 SUFFISSI_REGEX = [(re.compile(r), k) for r, k in DATI["suffissi_regex"]]
@@ -323,12 +326,19 @@ def fonemi_parola(parola, precedente=""):
         return uscita
     piana = unicodedata.normalize("NFD", w)
     piana = re.sub("[̀-ͯ]", "", piana)
-    # Senza accenti si cerca solo se il testo non ne ha: «pensò» non è «penso».
-    r = LESSICO.get(w, LESSICO.get(piana, w) if w == piana else w)
+    # La parola com'è scritta (con gli accenti del testo): «pensò» non è «penso». Prima il lessico scritto a
+    # mano, poi quello del Wikizionario.
+    r = LESSICO.get(w) or WIKIZIONARIO.get(w) or w
     for regola, grafia in OMOGRAFI.get(piana, []):
         if re.search(regola, precedente):
             r = grafia
             break
+    return da_grafia(r, w, piana)
+
+
+def da_grafia(r, w, piana):
+    """I fonemi di una grafia del lessico (accenti, qualità e ż ź ṡ ś), per la parola ``w`` (minuscola, con gli
+    accenti del testo) e ``piana`` (senza)."""
     base, acc, qual, forza = _lettere_di(r)
     n = len(base)
     atona = w in ATONE and not any(acc)
@@ -611,6 +621,8 @@ def impronta():
     h = hashlib.sha256()
     h.update(json.dumps({"versione": VERSIONE, "simboli": SYMBOLS}, ensure_ascii=False).encode())
     h.update((Path(__file__).with_name("dati.json")).read_bytes())
+    if _WIKI.exists():
+        h.update(_WIKI.read_bytes())
     return h.hexdigest()
 
 

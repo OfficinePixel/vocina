@@ -17,5 +17,10 @@ Modifiche rispetto a tiny-voca (commit 7241dfb):
 - pagina web e lettore nuovi (app.js, tinyvoca_web.js).
 
 Componenti di terze parti inclusi:
+- lessico_wikizionario.json: pronunce dal Wiktionary inglese (https://en.wiktionary.org),
+  contributori del Wiktionary, licenza CC BY-SA 4.0
+  (https://creativecommons.org/licenses/by-sa/4.0/), estratte con WikiPron
+  (https://github.com/CUNY-CL/wikipron) e convertite nella grafia del nostro lessico. Il file
+  resta sotto CC BY-SA 4.0; il resto di Vocina è sotto Apache 2.0.
 - ONNX Runtime Web (cartella ort/), Copyright (c) Microsoft Corporation, licenza MIT
   (vedi LICENSE-onnxruntime-web).
