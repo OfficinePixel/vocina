@@ -34,13 +34,18 @@ Tre passi:
    4.0), da alcuni omografi decisi dalla parola prima («cerca di impórti» contro «cosa ti impòrti»), dai
    suffissi, e altrimenti sulla penultima.
 
-Il lessico del Wiktionary contiene solo le parole che le regole sbagliano, e si rigenera con
-`python g2p_it/crea_lessico_wikizionario.py ita_latn_broad.tsv` dal file italiano di
-[WikiPron](https://github.com/CUNY-CL/wikipron). Sulle parole dei nostri testi, pesate per frequenza e
-confrontate con il Wiktionary, le e e le o aperte giuste passano dal 69% al 99,9% (`confronta_wikipron.py`).
-WikiPron però non riporta gli accenti, e la sillaba tonica si ricava solo dove c'è una ɛ o una ɔ: per le
-altre parole l'accento resta quello delle regole (per esempio «ricévere» è ancora letto «ricevére»). Il
-lessico va passato al G2P JS in `DATI.wikizionario`; quello Python lo legge da sé se il file c'è.
+Il lessico del Wiktionary contiene solo le parole che le regole sbagliano. Si rigenera con
+`python g2p_it/crea_lessico_wikizionario.py ita_latn_broad.tsv --kaikki kaikki.org-dictionary-Italian.jsonl.gz`.
+Le trascrizioni con l'accento vengono da [kaikki.org](https://kaikki.org/dictionary/Italian/) (wiktextract); le
+parole che lì mancano vengono dal file italiano di [WikiPron](https://github.com/CUNY-CL/wikipron), che non ha
+gli accenti. Le trascrizioni del Wiktionary sono state confrontate con quelle del G2P sulle parole dei nostri
+testi, pesate per frequenza:
+- l'accento giusto passa dal 98,3% al 99,7%;
+- la vocale tonica giusta (accento ed e/o) passa dal 96,7% al 99,0%;
+- le e e le o aperte giuste passano dal 69% al 99,8% (`confronta_wikipron.py`).
+
+Sono misure sugli stessi dati da cui il lessico è costruito. Gli errori rimasti sono quasi tutti parole
+straniere (software, copyright). Il lessico va passato al G2P JS in `DATI.wikizionario`; quello Python lo legge da sé se il file c'è.
 
 ```python
 import sys; sys.path.insert(0, "g2p_it")
@@ -118,7 +123,7 @@ export PYTHONPATH=$PWD/../vocina/g2p_it
 ## Licenze
 
 Il codice e i pesi sono sotto **Apache 2.0** (`LICENSE`), tranne `g2p_it/lessico_wikizionario.json`, che
-viene dal Wiktionary e resta sotto **CC BY-SA 4.0** (contributori del Wiktionary, estratto con WikiPron). Vocina deriva da tiny-voca di n4ze3m (Apache
+viene dal Wiktionary e resta sotto **CC BY-SA 4.0** (contributori del Wiktionary, estratto con kaikki.org e WikiPron). Vocina deriva da tiny-voca di n4ze3m (Apache
 2.0): le modifiche sono elencate in `NOTICE`. La cartella costruita include ONNX Runtime Web (© Microsoft,
 MIT, `web/vocina/LICENSE-onnxruntime-web`). Dati: Common Voice italiano (CC0 1.0), voci generate con
 Qwen3-TTS (Apache 2.0). eSpeak NG (GPL-3.0) è servito solo come programma esterno per le etichette del
