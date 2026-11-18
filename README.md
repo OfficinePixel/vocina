@@ -30,7 +30,7 @@ Tre passi:
 2. **Fonemi** con le regole dell'ortografia italiana: c e g dolci e dure, gn, gli, sc, qu, s e z sorde o
    sonore, doppie, n velare.
 3. **Accento** e **e/o aperte o chiuse**: dall'accento scritto, da un lessico di circa 760 voci scritto a
-   mano, poi da un lessico di circa 15.000 voci ricavato dal Wiktionary (`lessico_wikizionario.json`, CC BY-SA
+   mano, poi da un lessico di circa 21.000 voci ricavato dal Wiktionary (`lessico_wikizionario.json`, CC BY-SA
    4.0), da alcuni omografi decisi dalla parola prima («cerca di impórti» contro «cosa ti impòrti»), dai
    suffissi, e altrimenti sulla penultima.
 
