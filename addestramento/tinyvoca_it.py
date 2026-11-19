@@ -16,7 +16,9 @@ voce come riferimento, filtro con Whisper), rifatta per l'italiano e per i servi
    una sola parola diversa dal testo (lettera per lettera, accenti e spazi a parte), e le
    durate o velocità implausibili; poi il manifest JSONL per ``tiny-voca-prepare``.
 
-    python -m bancollm.voce.tinyvoca_it testi|voce|genera|filtra [--ore 2.5]
+    ~/Modelli/runtime/tiny-voca/.venv/bin/python -m bancollm.voce.tinyvoca_it testi|voce|genera|filtra [--ore 2.5]
+
+Serve un Python con numpy e soundfile: il Python di sistema non li ha, quello di tiny-voca sì.
 """
 
 from __future__ import annotations

@@ -10,8 +10,10 @@ Compito `_bacheca/2026-11-17-bancollm-tiny-voca-italiano.md`. Una cartella per v
 Il testo letto da qwen-tts è ``g2p_it.normalizza`` della frase scritta (in ``text_cifre`` quella con le cifre):
 numeri, ore, date, importi, unità e sigle arrivano già in parole, e le etichette del G2P sono le stesse parole.
 
-    python -m bancollm.voce.tinyvoca_tappa3 testi
-    python -m bancollm.voce.tinyvoca_it genera --cartella dati/tts/2026-11-17-tiny-voca/completo/I1 --ore 9
+    PY=~/Modelli/runtime/tiny-voca/.venv/bin/python   # serve numpy e soundfile
+    $PY -m bancollm.voce.tinyvoca_tappa3 testi
+    $PY -m bancollm.voce.tinyvoca_it genera --cartella dati/tts/2026-11-17-tiny-voca/completo/I1 --ore 9
+    $PY -m bancollm.voce.tinyvoca_it filtra --cartella dati/tts/2026-11-17-tiny-voca/completo/I1
 """
 
 import argparse

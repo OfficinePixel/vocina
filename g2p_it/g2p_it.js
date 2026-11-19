@@ -5,6 +5,7 @@
 //   const g2p = creaG2P(dati);   // dati = il contenuto di dati.json
 //   g2p.frasi(testo)             // le frasi normalizzate
 //   g2p.fonemi(frase)            // {symbols, ids, stress}
+//   g2p.fonemi(frase, ["richard"])  // con letture facoltative (dati.json, «varianti»)
 
 export const VERSIONE = 1;
 
@@ -27,6 +28,7 @@ export function creaG2P(DATI) {
   // in DATI.wikizionario. Se manca, solo regole.
   const WIKIZIONARIO = DATI.wikizionario ?? {};
   const OMOGRAFI = DATI.omografi;
+  const VARIANTI = DATI.varianti;  // letture facoltative per nome, spente se non chieste: {"richard": …}
   const perLunghezza = (a, b) => b[0].length - a[0].length;
   const SUFFISSI = [...DATI.suffissi_accento].sort(perLunghezza);
   const SUFFISSI_REGEX = DATI.suffissi_regex.map(([r, k]) => [new RegExp(r), k]);
@@ -254,7 +256,16 @@ export function creaG2P(DATI) {
 
   const vocale = (c) => VOCALI_LETTERE.has(c);
 
-  function fonemiParola(parola, precedente = "") {
+  function sostituzioni(varianti) {
+    const sost = {};
+    for (const nome of varianti) {
+      if (!(nome in VARIANTI)) throw new Error(`variante sconosciuta: ${nome}`);
+      Object.assign(sost, VARIANTI[nome].parole);
+    }
+    return sost;
+  }
+
+  function fonemiParola(parola, precedente = "", varianti = []) {
     let w = [...parola.toLowerCase()].map((c) => LETTERE_STRANIERE[c] ?? c).join("");
     w = w.replace(/[^a-zàèéìíòóùú]/g, "");
     if (!w) return [];
@@ -265,7 +276,8 @@ export function creaG2P(DATI) {
     }
     const piana = w.normalize("NFD").replace(/[̀-ͯ]/g, "");
     // Senza accenti si cerca solo se il testo non ne ha: «pensò» non è «penso».
-    let r = LESSICO[w] || WIKIZIONARIO[w] || w;  // prima il lessico a mano, poi il Wikizionario
+    // prima le varianti chieste, poi il lessico a mano, poi il Wikizionario
+    let r = sostituzioni(varianti)[w] || LESSICO[w] || WIKIZIONARIO[w] || w;
     for (const [regola, grafia] of OMOGRAFI[piana] ?? []) {
       if (new RegExp(regola).test(precedente)) { r = grafia; break; }
     }
@@ -442,7 +454,8 @@ export function creaG2P(DATI) {
     return uscita;
   }
 
-  function pezzi(testo) {
+  function pezzi(testo, varianti = []) {
+    sostituzioni(varianti);  // un nome sconosciuto è un errore anche se il testo non lo tocca
     const uscita = [];
     let precedente = "";
     for (const m of normalizza(testo).matchAll(PEZZO)) {
@@ -457,7 +470,7 @@ export function creaG2P(DATI) {
       const parti = s.split("'").filter((p) => p);
       parti.forEach((parte, i) => {
         let f = proclitica(parte, i + 1 < parti.length ? parti[i + 1] : "");
-        if (!f.length) f = fonemiParola(parte, precedente);
+        if (!f.length) f = fonemiParola(parte, precedente, varianti);
         precedente = parte.toLowerCase();
         if (i + 1 < parti.length) f = f.map(([x]) => [x, 0]);
         parola = parola.concat(f);
@@ -470,9 +483,10 @@ export function creaG2P(DATI) {
     return uscita;
   }
 
-  function fonemi(testo) {
+  // varianti: letture facoltative per nome (dati.json, «varianti»), per esempio ["richard"]: «10 €» → «dieci iuro».
+  function fonemi(testo, varianti = []) {
     const simboli = [BOS], accento = [0];
-    for (const [punt, valore] of pezzi(testo)) {
+    for (const [punt, valore] of pezzi(testo, varianti)) {
       if (punt) {
         if (simboli[simboli.length - 1] !== valore) { simboli.push(valore); accento.push(0); }
         continue;
@@ -487,5 +501,5 @@ export function creaG2P(DATI) {
     return { symbols: simboli, ids: simboli.map((s) => ID[s]), stress: accento };
   }
 
-  return { normalizza, frasi, fonemi, fonemiParola, SYMBOLS };
+  return { normalizza, frasi, fonemi, fonemiParola, SYMBOLS, VARIANTI: Object.keys(VARIANTI) };
 }

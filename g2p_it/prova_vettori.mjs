@@ -13,7 +13,7 @@ const uguale = (a, b) => JSON.stringify(a) === JSON.stringify(b);
 for (const v of vettori) {
   const norm = g2p.normalizza(v.testo);
   const fr = g2p.frasi(v.testo);
-  const f = g2p.fonemi(v.testo);
+  const f = g2p.fonemi(v.testo, v.varianti ?? []);
   const diversi = [];
   if (norm !== v.normalizzato) diversi.push(`normalizzato\n  py: ${v.normalizzato}\n  js: ${norm}`);
   if (!uguale(fr, v.frasi)) diversi.push(`frasi\n  py: ${JSON.stringify(v.frasi)}\n  js: ${JSON.stringify(fr)}`);

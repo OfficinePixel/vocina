@@ -1956,5 +1956,14 @@
     "vènti"
    ]
   ]
+ },
+ "nota_varianti": "Letture facoltative, spente se non chieste (fonemi(testo, varianti=[...])): per ogni nome, parole da leggere con un'altra grafia, prima di ogni lessico.",
+ "varianti": {
+  "richard": {
+   "nota": "La Richardizzazione: «euro» all'inglese, «iuro», come lo dice Richard (issue #1 di OfficinePixel/vocina)",
+   "parole": {
+    "euro": "iùro"
+   }
+  }
  }
 }

@@ -44,29 +44,29 @@ export async function caricaVoce({ ort, dati, modello, metadati, wasm }) {
     return 0.06;  // spezzata a metà delle parole
   };
 
-  function tratti(frase) {
-    const f = g2p.fonemi(frase);
+  function tratti(frase, varianti) {
+    const f = g2p.fonemi(frase, varianti);
     if (f.symbols.length <= 2) return [];
     if (f.ids.length <= PEZZO) return [frase];
     const parole = frase.split(" ");
     if (parole.length < 2) return [frase];
     const meta = Math.ceil(parole.length / 2);
-    return [...tratti(parole.slice(0, meta).join(" ")), ...tratti(parole.slice(meta).join(" "))];
+    return [...tratti(parole.slice(0, meta).join(" "), varianti), ...tratti(parole.slice(meta).join(" "), varianti)];
   }
 
-  function adatta(frase) {
-    const intera = g2p.fonemi(frase);
+  function adatta(frase, varianti) {
+    const intera = g2p.fonemi(frase, varianti);
     if (intera.symbols.length <= 2) return [];
     if (intera.ids.length <= PEZZO) return [{ f: intera, pausa: PAUSA_FRASE }];
     const pezzi = [];
     let corrente = "";
-    for (const t of frase.split(/(?<=[,;:—])\s+/).flatMap(tratti)) {
+    for (const t of frase.split(/(?<=[,;:—])\s+/).flatMap((t) => tratti(t, varianti))) {
       const unito = corrente ? corrente + " " + t : t;
-      if (corrente && g2p.fonemi(unito).ids.length > PEZZO) { pezzi.push(corrente); corrente = t; }
+      if (corrente && g2p.fonemi(unito, varianti).ids.length > PEZZO) { pezzi.push(corrente); corrente = t; }
       else corrente = unito;
     }
     if (corrente) pezzi.push(corrente);
-    return pezzi.map((p, i) => ({ f: g2p.fonemi(p), pausa: i + 1 < pezzi.length ? pausaDopo(p) : PAUSA_FRASE }));
+    return pezzi.map((p, i) => ({ f: g2p.fonemi(p, varianti), pausa: i + 1 < pezzi.length ? pausaDopo(p) : PAUSA_FRASE }));
   }
 
   async function sintetizza(f, voce, velocita) {
@@ -82,11 +82,12 @@ export async function caricaVoce({ ort, dati, modello, metadati, wasm }) {
   }
 
   // suFrase({indice, totale, testo, fonemi, audio, ms}) per ogni frase pronta; ritorna l'audio intero.
-  async function leggi(testo, { voce = 0, velocita = 1, suFrase = () => {} } = {}) {
+  // varianti: letture facoltative del G2P (dati.json, «varianti»), per esempio ["richard"].
+  async function leggi(testo, { voce = 0, velocita = 1, varianti = [], suFrase = () => {} } = {}) {
     const frasi = g2p.frasi(testo);
     const pezzi = [];
     for (let i = 0; i < frasi.length; i++) {
-      for (const { f, pausa } of adatta(frasi[i])) {
+      for (const { f, pausa } of adatta(frasi[i], varianti)) {
         const t0 = performance.now();
         const audio = await sintetizza(f, voce, velocita);
         const ms = performance.now() - t0;

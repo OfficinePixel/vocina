@@ -46,6 +46,7 @@ LESSICO = DATI["lessico"]
 _WIKI = Path(__file__).with_name("lessico_wikizionario.json")
 WIKIZIONARIO = json.loads(_WIKI.read_text(encoding="utf-8"))["voci"] if _WIKI.exists() else {}
 OMOGRAFI = DATI["omografi"]
+VARIANTI = DATI["varianti"]  # letture facoltative per nome, spente se non chieste: {"richard": …}
 SUFFISSI = sorted(DATI["suffissi_accento"], key=lambda s: -len(s[0]))
 SUFFISSI_REGEX = [(re.compile(r), k) for r, k in DATI["suffissi_regex"]]
 SUFFISSI_TONICI = sorted(DATI["suffissi_tonici"], key=lambda s: -len(s[0]))
@@ -311,9 +312,20 @@ def _vocale(c):
     return c in _VOCALI_LETTERE
 
 
-def fonemi_parola(parola, precedente=""):
+def _sostituzioni(varianti):
+    """Le parole da leggere con un'altra grafia per le varianti chieste (nomi in ``VARIANTI``)."""
+    sost = {}
+    for nome in varianti:
+        if nome not in VARIANTI:
+            raise ValueError(f"variante sconosciuta: {nome}")
+        sost.update(VARIANTI[nome]["parole"])
+    return sost
+
+
+def fonemi_parola(parola, precedente="", varianti=()):
     """Una parola (solo lettere) in ``[(fono, accento)]``; accento 1 sulla vocale tonica. ``precedente`` è la
-    parola prima (minuscola), per gli omografi: «cerca di impórti», «ti impòrti»."""
+    parola prima (minuscola), per gli omografi: «cerca di impórti», «ti impòrti». ``varianti``: nomi in
+    ``VARIANTI`` («richard»: «euro» → «iuro»), che vengono prima di ogni lessico."""
     w = "".join(LETTERE_STRANIERE.get(c, c) for c in parola.lower())
     w = re.sub("[^a-zàèéìíòóùú]", "", w)
     if not w:
@@ -328,7 +340,7 @@ def fonemi_parola(parola, precedente=""):
     piana = re.sub("[̀-ͯ]", "", piana)
     # La parola com'è scritta (con gli accenti del testo): «pensò» non è «penso». Prima il lessico scritto a
     # mano, poi quello del Wikizionario.
-    r = LESSICO.get(w) or WIKIZIONARIO.get(w) or w
+    r = _sostituzioni(varianti).get(w) or LESSICO.get(w) or WIKIZIONARIO.get(w) or w
     for regola, grafia in OMOGRAFI.get(piana, []):
         if re.search(regola, precedente):
             r = grafia
@@ -565,9 +577,10 @@ def _proclitica(parte, seguente):
     return uscita
 
 
-def pezzi(testo):
+def pezzi(testo, varianti=()):
     """``[(è_punteggiatura, valore)]`` come li vuole ``tiny_voca.text.tokenize``: per il testo una lista di
     parole, ognuna ``[(fono, accento)]``. Le parti unite dall'apostrofo fanno una parola sola."""
+    _sostituzioni(varianti)  # un nome sconosciuto è un errore anche se il testo non lo tocca
     uscita = []
     precedente = ""
     for m in _PEZZO.finditer(normalizza(testo)):
@@ -582,7 +595,7 @@ def pezzi(testo):
         parola = []
         parti = [p for p in s.split("'") if p]
         for i, parte in enumerate(parti):
-            f = _proclitica(parte, parti[i + 1] if i + 1 < len(parti) else "") or fonemi_parola(parte, precedente)
+            f = _proclitica(parte, parti[i + 1] if i + 1 < len(parti) else "") or fonemi_parola(parte, precedente, varianti)
             precedente = parte.lower()
             if i + 1 < len(parti):  # la parte elisa è atona: dell', quest', sant'
                 f = [(x, 0) for x, _ in f]
@@ -595,10 +608,11 @@ def pezzi(testo):
     return uscita
 
 
-def fonemi(testo):
-    """Token del testo: ``{"symbols", "ids", "stress"}``, con le stesse regole di ``tiny_voca.text.tokenize``."""
+def fonemi(testo, varianti=()):
+    """Token del testo: ``{"symbols", "ids", "stress"}``, con le stesse regole di ``tiny_voca.text.tokenize``.
+    ``varianti``: letture facoltative per nome (``VARIANTI``), per esempio ``["richard"]``: «10 €» → «dieci iuro»."""
     simboli, accento = [BOS], [0]
-    for punt, valore in pezzi(testo):
+    for punt, valore in pezzi(testo, varianti):
         if punt:
             if simboli[-1] != valore:
                 simboli.append(valore)
@@ -634,8 +648,15 @@ def leggibile(f):
 if __name__ == "__main__":
     if sys.argv[1:2] == ["--vettori"]:
         frasi_prova = Path(__file__).with_name("frasi_prova.txt").read_text(encoding="utf-8").splitlines()
-        vettori = [{"testo": t, "normalizzato": normalizza(t), "frasi": frasi(t), **fonemi(t)}
-                   for t in frasi_prova if t.strip() and not t.startswith("#")]
+        vettori = []
+        for t in frasi_prova:
+            if not t.strip() or t.startswith("#"):
+                continue
+            # «[richard] 10 €»: la frase con le varianti fra quadre
+            varianti = t[1:t.index("]")].split(",") if t.startswith("[") else []
+            t = t[t.index("]") + 1:].strip() if varianti else t
+            vettori.append({"testo": t, **({"varianti": varianti} if varianti else {}), "normalizzato": normalizza(t),
+                            "frasi": frasi(t), **fonemi(t, varianti)})
         Path(__file__).with_name("vettori.json").write_text(
             json.dumps({"versione": VERSIONE, "impronta": impronta(), "vettori": vettori}, ensure_ascii=False, indent=0),
             encoding="utf-8")

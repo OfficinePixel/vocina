@@ -577,3 +577,7 @@ Andrea Bianchi abita a Montebelluna da 10 anni.
 Domani Martina e Valentina vanno a Bassano del Grappa.
 Ci siamo conosciuti il 21 novembre 2021, a Recoaro Terme.
 Dal 12 al 28 dicembre l'ufficio resta chiuso.
+# Varianti facoltative (fra quadre): la Richardizzazione, «euro» → «iuro» (issue #1 di vocina)
+[richard] Il totale della fattura è di 1.203,59 euro, IVA compresa.
+[richard] Costa € 12,50 oppure 7€, e il premio è di 1.000.000,00 euro.
+[richard] L'euro e l'Europa: gli euro della zona euro.

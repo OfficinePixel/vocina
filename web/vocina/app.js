@@ -86,6 +86,7 @@ $("leggi").onclick = async () => {
     const audio = await voce.leggi($("testo").value, {
       voce: Number($("voce").value || 0),
       velocita: Number($("velocita").value),
+      varianti: $("richard").checked ? ["richard"] : [],
       suFrase: ({ indice, totale, testo, fonemi, audio, ms, pausa }) => {
         if (fermato) return;
         calcolo += ms;
@@ -135,6 +136,7 @@ try {
     $("scelta-voce").hidden = false;
   }
   stato(`Pronta in ${((performance.now() - t0) / 1000).toFixed(1)} s. Scrivi un testo e premi «Leggi».`);
+  $("scelta-richard").hidden = !voce.g2p.VARIANTI.includes("richard");  // il G2P di questa consegna la conosce
   $("leggi").textContent = "Leggi";
   $("leggi").disabled = false;
   window.pronto = true;

@@ -61,6 +61,17 @@ const g2p = creaG2P(await (await fetch("g2p_it/dati.json")).json());
 console.log(g2p.fonemi("Il treno parte alle 14:35."));
 ```
 
+Letture facoltative, spente se non chieste (`varianti` in `dati.json`). Per ora ce n'è una, la
+**Richardizzazione** (#1): «euro» si legge «iuro», all'inglese. Nella pagina web è la casella omonima.
+
+```python
+g2p_it.fonemi("Costa 8 €.", ["richard"])   # … ˈɔ t t o <sp> j ˈu r o . …
+```
+
+```js
+g2p.fonemi("Costa 8 €.", ["richard"]);
+```
+
 Le due versioni devono dare gli stessi token. Dopo ogni modifica:
 
 ```bash
