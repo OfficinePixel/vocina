@@ -1,6 +1,6 @@
 """Vocina per il web: la cartella da servire (index.html, JS, wasm, modello), a file separati.
 
-    python vocina.py MODELLO.onnx USCITA/ [--pilota] [--fp32]
+    python vocina.py MODELLO.onnx USCITA/ [--pilota] [--fp32] [--stato "nota sul modello"]
     (in bancollm: python -m bancollm.voce.web.vocina …)
 
 Accanto a MODELLO.onnx serve MODELLO.json (scritto da ``tiny_voca.export``). Il modello va in int8
@@ -71,7 +71,7 @@ def _python_con_onnxruntime() -> str:
     return sys.executable if importlib.util.find_spec("onnxruntime") else str(VENV)
 
 
-def costruisci(modello: Path, uscita: Path, pilota: bool, int8: bool = True) -> int:
+def costruisci(modello: Path, uscita: Path, pilota: bool, int8: bool = True, stato: str | None = None) -> int:
     if uscita.exists():
         shutil.rmtree(uscita)
     (uscita / "ort").mkdir(parents=True)
@@ -98,7 +98,7 @@ def costruisci(modello: Path, uscita: Path, pilota: bool, int8: bool = True) -> 
     shutil.copy(QUI / "tinyvoca_web.js", uscita / "tinyvoca_web.js")
     for nome in ("LICENSE", "NOTICE", "LICENSE-onnxruntime-web", "vocina.css"):
         shutil.copy(SORGENTE / nome, uscita / nome)
-    sost = {"{{MB}}": f"{len(byte_modello) / 1e6:.1f}".replace(".", ","), "{{STATO_MODELLO}}": STATO[pilota],
+    sost = {"{{MB}}": f"{len(byte_modello) / 1e6:.1f}".replace(".", ","), "{{STATO_MODELLO}}": stato or STATO[pilota],
             "{{ESEMPI}}": json.dumps(ESEMPI, ensure_ascii=False), "{{VERSIONE}}": versione,
             "{{VERSIONE_ORT}}": hashlib.sha256(byte_wasm).hexdigest()[:12]}
     for nome in ("index.html", "app.js"):
@@ -143,5 +143,6 @@ if __name__ == "__main__":
     p.add_argument("uscita", type=Path)
     p.add_argument("--pilota", action="store_true", help="la nota dice che è il modello di prova a una voce")
     p.add_argument("--fp32", action="store_true", help="il modello così com'è, senza int8")
+    p.add_argument("--stato", help="la nota sul modello, al posto di quella predefinita (per un checkpoint intermedio)")
     a = p.parse_args()
-    print(a.uscita, f"{costruisci(a.modello, a.uscita, a.pilota, not a.fp32) / 1e6:.1f} MB")
+    print(a.uscita, f"{costruisci(a.modello, a.uscita, a.pilota, not a.fp32, a.stato) / 1e6:.1f} MB")

@@ -494,7 +494,7 @@ def filtra(cartella: Path, soglia: float = 0.15, stampa=print) -> None:
         elif _lettere_sole(r["text"]) != _lettere_sole(sentito):
             motivi.append("parola")  # una parola letta male («monarcia») sta sotto la soglia sulla frase
         picco = float(np.max(np.abs(x))) or 1.0
-        voce_rif = {**r, "voice_id": "I1", "audio": f"audio/{r['id']}.wav", "duration_seconds": round(durata, 3),
+        voce_rif = {**r, "voice_id": r.get("voice_id", "I1"), "audio": f"audio/{r['id']}.wav", "duration_seconds": round(durata, 3),
                     "teacher_model": "Qwen/Qwen3-TTS-12Hz-1.7B-Base", "asr_transcript": cache[r["id"]],
                     "phoneme_error": round(err, 4), "review_reasons": motivi}
         if motivi:

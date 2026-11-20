@@ -84,7 +84,7 @@ node g2p_it/prova_vettori.mjs         # la versione JS li confronta uno per uno
 ```bash
 cd web && npm install                 # onnxruntime-web 1.27.0
 pip install onnxruntime               # solo per la quantizzazione int8
-python vocina.py MODELLO.onnx uscita/ [--pilota] [--fp32]
+python vocina.py MODELLO.onnx uscita/ [--pilota] [--fp32] [--stato "nota sul modello"]
 ```
 
 Accanto a `MODELLO.onnx` serve `MODELLO.json`, come nelle Release. La cartella `uscita/` si serve così com'è
@@ -100,9 +100,11 @@ le pause.
 
 - **Pilota** (Release `v0.1-pilota`): una voce femminile, 2,6 ore di parlato, 30 000 passi. Le etichette
   dell'addestramento erano di eSpeak NG, con lo stesso inventario: nel browser lo guida il G2P nostro.
-- **Tappa 3** (in addestramento): due voci, femminile e maschile, circa 18 ore, etichette dal G2P nostro. Il
-  vocabolario ha 8 simboli riservati in coda, per insegnare più avanti suoni non verbali con un
-  affinamento.
+- **Tappa 3**: due voci, femminile (I1) e maschile (I2), 17,8 ore di parlato, etichette dal G2P nostro.
+  Il vocabolario ha 8 simboli riservati in coda, per insegnare più avanti suoni non verbali con un
+  affinamento. In addestramento fino a 100 000 passi; la Release `v0.2-60k` è il punto intermedio a
+  60 796 passi. Whisper ritrascrive giuste, con tutte e due le voci, le frasi di prova (orari, importi,
+  abbreviazioni).
 
 Le voci sono **sintetiche**: disegnate a parole con Qwen3-TTS VoiceDesign, non clonate da persone reali. Le
 frasi lette vengono da Common Voice italiano (CC0) e da modelli di frase nostri. Ogni clip è stata
